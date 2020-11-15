@@ -1,0 +1,7 @@
+{
+  "name": "elmonir",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
