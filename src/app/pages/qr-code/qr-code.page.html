@@ -1,9 +1,15 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>qr-code</ion-title>
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+    <ion-title>
+      Qr Code
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="ion-text-center ion-padding" >
+  <button (click)="scan()">Scan <ion-icon name="qr-code"></ion-icon></button>
+   {{scanedCode}}
 </ion-content>

@@ -16,7 +16,7 @@ export class HomePage {
     this.show = !this.show;
   }
   ionViewDidEnter() {
-    this.backButtonSubscription = this.platefrom.backButton.subscribe(
+    this.backButtonSubscription = this.platefrom.backButton.subscribeWithPriority(0,
       async () => {
         this.closeApp();
         //navigator["app"].exitApp();
