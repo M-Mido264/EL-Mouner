@@ -1,0 +1,72 @@
+<ion-content class="ion-padding">
+  <div class="container">
+    <div class="header-info">
+      <ion-avatar>
+        <ion-img src="assets/images/whiteEnLogo.png"></ion-img>
+      </ion-avatar>
+    </div>
+
+    <form [formGroup]="regForm">
+      <div *ngIf="isSigned && getInput('UserName').invalid" class="tool-tip-cont">
+        <span *ngIf="getInput('UserName').errors.required">Email Required</span>
+        <span *ngIf="getInput('UserName').errors.pattern">Please Enter Valid Email</span>
+      </div>
+      <ion-item no-lines>
+        <ion-input  placeholder="Email" formControlName="UserName" name="username"></ion-input>
+        <ion-icon name="mail-open-outline" item-right></ion-icon>
+      </ion-item>
+
+      <div *ngIf="isSigned && getInput('Mobile').invalid" class="tool-tip-cont">
+        <span *ngIf="getInput('Mobile').errors.required">Mobile required</span>
+        <span *ngIf="getInput('Mobile').errors.minlength">Mobile must be 10 number</span>
+        <span *ngIf="getInput('Mobile').errors.maxlength">Mobile must be 20 number</span>
+        <span *ngIf="getInput('Mobile').errors.zeroError && !getInput('mobile').errors.minlength">Mobile must start with 0</span>
+      </div>
+      <ion-item no-lines>
+        <ion-input  placeholder="Mobile" formControlName="Mobile" name="Mobile" type="number" maxlength="20"></ion-input>
+        <ion-icon name="phone-portrait-outline"></ion-icon>
+      </ion-item>
+
+      <div *ngIf="isSigned && PatientChecked && getInput('PatientNo').invalid" class="tool-tip-cont">
+        <span *ngIf="getInput('PatientNo').errors.required">PatientNo required</span>
+       </div>
+      <ion-item no-lines *ngIf="PatientChecked">
+        <ion-input  placeholder="PatientNo" formControlName="PatientNo" name="PatientNo" type="number" maxlength="11"></ion-input>
+        <ion-icon name="bag-add-outline"></ion-icon>
+      </ion-item>
+
+      <div *ngIf="isSigned && getInput('Password').invalid" class="tool-tip-cont">
+        <span *ngIf="getInput('Password').errors.required">Password required</span>
+        <span *ngIf="getInput('Password').errors.minlength">Min 6 characters</span>
+        <span *ngIf="getInput('Password').errors.maxlength">Max 12 characters</span>
+     </div>
+      <ion-item no-lines>
+        <ion-input type="password" formControlName="Password" placeholder="Password" maxlength="12" name="password"></ion-input>
+        <ion-icon name="lock-closed-outline" item-right></ion-icon>
+      </ion-item>
+
+      <div *ngIf="isSigned && getInput('ConfirmPassword').invalid" class="tool-tip-cont">
+        <span *ngIf="getInput('ConfirmPassword').errors.required">ConfirmPassword required</span>
+        <span *ngIf="getInput('ConfirmPassword').errors.minlength">Min 6 characters</span>
+        <span *ngIf="getInput('ConfirmPassword').errors.maxlength">Max 12 characters</span>
+        <span *ngIf="getInput('ConfirmPassword').errors.mustMatch">ConfirmPassword doesn't match password</span>
+        <!-- mustMatch -->
+      </div>
+      <ion-item no-lines>
+        <ion-input type="password" formControlName="ConfirmPassword"  placeholder="ConfirmPassword" maxlength="12" name="ConfirmPassword"></ion-input>
+        <ion-icon name="lock-closed-outline" item-right></ion-icon>
+      </ion-item>
+
+      <label class="container" position="stacked">
+        Old Patient
+        <input type="checkbox" formControlName="PatientCheckedForm" [(ngModel)]="PatientChecked" name="PatientChecked" (change)="toggleChange()">
+      </label>
+
+      <button (click)="register()">Register</button>
+    </form>
+
+  </div>
+</ion-content>
+<footer [hidden]="keyboard.isVisible">
+  <p>Do you have an account already? <a routerLink="/login">Sign In.</a></p>
+</footer>

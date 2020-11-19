@@ -1,0 +1,43 @@
+<ion-content class="ion-padding">
+  <div class="container">
+    <div class="header-info">
+      <ion-avatar>
+        <ion-img src="assets/images/whiteEnLogo.png"></ion-img>
+      </ion-avatar>
+    </div>
+
+    <form [formGroup]="LoginForm">
+      
+      <div *ngIf="isSigned && getInput('UserName').invalid" class="tool-tip-cont">
+        <span *ngIf="getInput('UserName').errors.required">Email required</span>
+        <span *ngIf="getInput('UserName').errors.pattern">Please enter valid email</span>
+      </div>
+      <ion-item no-lines>
+        <ion-input required placeholder="Email" formControlName="UserName" type="email" name="username"></ion-input>
+        <ion-icon name="mail-open-outline" item-right></ion-icon>
+      </ion-item>
+
+      
+      <div *ngIf="isSigned && getInput('Password').invalid" class="tool-tip-cont">
+        <span *ngIf="getInput('Password').errors.required">Password required</span>
+        <span *ngIf="getInput('Password').errors.minlength">Min 6 characters</span>
+     </div>
+      <ion-item no-lines>
+        <ion-input type="password" required formControlName="Password" placeholder="Password" name="password"></ion-input>
+        <ion-icon name="lock-closed-outline" item-right></ion-icon>
+      </ion-item>
+
+      <div class="row">
+        <div class="col-md-12" style="text-align: center;">
+          <a class="forgetpassword">Forget Your Password?</a>
+        </div>
+      </div>
+      <br>
+        <button (click)="Login()">Sign In</button>
+    </form>
+   
+  </div>
+</ion-content>
+<footer [hidden]="keyboard.isVisible">
+  <p>Don't have an account? <a routerLink="/register">Create Account.</a></p>
+</footer>

@@ -1,0 +1,94 @@
+ion-content{
+    --ion-background-color: #26cad3;
+    --padding-top: var(--ion-padding, 40px) !important;
+    bottom: 2%;
+    .container{
+      text-align: center;
+    }
+    form {
+        width: 100%;
+        padding: 1rem 0;
+        
+        ion-input {
+            background-color: white;
+            color: #201872;
+            font-size: 0.9em;
+            .item-inner {
+                 border-bottom-color: transparent !important;
+                  box-shadow: none !important; 
+                  padding-left: 10px;
+                  padding-right: 10px;
+                }
+        }
+
+        ion-icon{
+            color: #26cad3;
+        }
+    }
+    a{
+        margin-bottom: 8%;
+        display: block;        
+    }      
+}
+footer{
+    background-color: #4ad9dd;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+footer a {
+  margin-bottom: 0%;
+  display: inline-block;    
+  text-decoration: none;
+}
+
+div.header-info {
+    margin-bottom: 1rem;
+    text-align: center;
+    ion-avatar {
+        width: 180px;
+        height: 180px;
+        display: inline-block;
+        &.no-shadow {
+            box-shadow: none;
+            border-radius: 0;
+        }
+        ion-img {
+            padding: 15px;
+            object-fit: contain;
+        }
+    }
+    width: 100%;
+}
+
+.container {
+    display: block;
+    color:  #201872;
+    cursor: pointer;
+    font-weight:bold;
+}
+
+
+// /* Hide the browser's default checkbox */
+
+// .container input {
+//     position: absolute;
+//     opacity: 0;
+//     cursor: pointer;
+//     height: 0;
+//     width: 0;
+// }
+
+
+// /* Create a custom checkbox */
+
+// .checkmark {
+//     position: absolute;
+//     top: 0;
+//     left: 50%;
+//     height: 25px;
+//     width: 25px;
+//     background-color: #eee;
+// }

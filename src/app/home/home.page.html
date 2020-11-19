@@ -1,20 +1,72 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>
-      Blank
+      Home
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-searchbar></ion-searchbar>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content padding [fullscreen]="true">
+  <div padding>
+    <ion-segment [(ngModel)]="segment">
+      <ion-segment-button value="ARTICLES">
+        ARTICLES
+      </ion-segment-button>
+      <ion-segment-button value="NEWS">
+        NEWS
+      </ion-segment-button>
+      <ion-segment-button value="FEATURES">
+        FEATURES
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div [ngSwitch]="segment">
+    <ion-list *ngSwitchCase="'ARTICLES'">
+      <!-- <ion-item *ngFor="let a of articles">
+        <ion-thumbnail item-start>
+          <img class="img" src="{{a.photo}}">
+        </ion-thumbnail>
+        <h3 class="blue">{{a.title}}</h3>
+        <p>
+          {{a.body}}
+        </p>
+      </ion-item> -->
+      <b> ARTICLES </b>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    </ion-list>
+  </div>
+  <div [ngSwitch]="segment">
+    <ion-list *ngSwitchCase="'NEWS'">
+      <!-- <ion-item *ngFor="let n of news">
+        <ion-thumbnail item-start>
+          <img class="img" src="{{n.photo}}">
+        </ion-thumbnail>
+        <h3 class="blue">{{n.title}}</h3>
+        <p>
+            {{n.body}}
+        </p>
+      </ion-item> -->
+      <b>NEWS</b>
+    </ion-list>
+  </div>
+  <div [ngSwitch]="segment">
+    <ion-list *ngSwitchCase="'FEATURES'">
+      <!-- <ion-item *ngFor="let n of news">
+        <ion-thumbnail item-start>
+          <img class="img" src="{{n.photo}}">
+        </ion-thumbnail>
+        <h3 class="blue">{{n.title}}</h3>
+        <p>
+            {{n.body}}
+        </p>
+      </ion-item> -->
+      <b>FEATURES</b>
+    </ion-list>
   </div>
 </ion-content>
