@@ -85,12 +85,12 @@ export class LoginPage implements OnInit {
             if (res.access_token) {
               this.sharedService.accessToken = res.access_token;
               this.sharedService.userId = res.clientId;
-              //this.sharedService.patientId = res.patientId;
+              this.sharedService.patientId = res.patientId;
                 localStorage.setItem("accessToken", res.access_token);
                 localStorage.setItem("userName", res.userName);
                 localStorage.setItem("password", this.LoginForm.value.Password);
                 localStorage.setItem("userId", res.clientId);
-                //localStorage.setItem("patientId", res.patientId);
+                localStorage.setItem("patientId", res.patientId);
                 this.router.navigate(["/tabs"]);
                 this.LoginForm.reset();
                 this.isSigned = false;
@@ -141,7 +141,7 @@ export class LoginPage implements OnInit {
 
   async presentError() {
     let toast = this.toastCtrl.create({
-      message: "Cheack Network",
+      message: "Check Network",
       duration: 3000,
       position: "top"
     });

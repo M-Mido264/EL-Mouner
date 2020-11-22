@@ -74,12 +74,12 @@ export class AppComponent {
               if (res.access_token) {
                 this.sharedService.accessToken = res.access_token;
                 this.sharedService.userId = res.clientId;
-                //this.sharedService.patientId = res.patientId;
+                this.sharedService.patientId = res.patientId;
                 localStorage.setItem("accessToken", res.access_token);
                 localStorage.setItem("userName", res.userName);
                 localStorage.setItem("password", password);
                 localStorage.setItem("userId", res.clientId);
-                //localStorage.setItem("patientId", res.patientId);
+                localStorage.setItem("patientId", res.patientId);
                 this.router.navigate(["/tabs"]);
               }
             },

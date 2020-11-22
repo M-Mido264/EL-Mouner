@@ -75,9 +75,10 @@ export class RegisterPage implements OnInit {
           }
           loader.dismiss();
         }, err => {
-          if (err.error === 'EmailAlreadyExists'
-           || err.error === 'MobileAlreadyExists' ) {
-          this.createEnAlert(err.error)
+          if (err.error.message === 'An already existing user with this email, If you forgot password Please click forgot password to reset it' 
+          ||err.error.message === 'An already existing user with this mobile number, If you already have an account please login with'
+          ||err.error.message === 'Incorrect patient number ,Please insert the right one') {
+          this.createEnAlert(err.error.message)
           loader.dismiss();
           } else {
             console.log(err)
@@ -91,7 +92,7 @@ export class RegisterPage implements OnInit {
   }
   async presentError(){
     let toast = this.toastCtrl.create({
-      message: "Cheack Network",
+      message: "Check Network",
       duration: 3000,
       position: "top"
     });
