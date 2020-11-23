@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
 import { Platform } from '@ionic/angular';
 
@@ -11,13 +12,25 @@ import { Platform } from '@ionic/angular';
 export class QrCodePage implements OnInit {
   scanedCode =null;
   qrCode:any;
-  constructor(private qrScanner: QRScanner,private platform:Platform) 
+  backButtonSubscription
+  constructor(private qrScanner: QRScanner,private platform:Platform,private router:Router) 
   {
   //  this.platform.backButton.subscribeWithPriority(0,()=>{
   //   document.getElementsByTagName("body")[0].style.opacity = "1";
   //   this.qrCode.unsubscribe();
   //  })
    }
+
+   ionViewWillEnter() {
+    this.backButtonSubscription = this.platform.backButton.subscribeWithPriority(1,
+      async () => {
+        this.router.navigate(["/tabs"]);
+      }
+    );
+  }
+  ionViewDidLeave() {
+    this.backButtonSubscription.unsubscribe();
+  }
 
   ngOnInit() {
   }

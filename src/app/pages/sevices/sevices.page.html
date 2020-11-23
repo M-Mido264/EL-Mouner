@@ -9,6 +9,58 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <p>
+    We offer a wide range of services begining for the personalized individual service offered to the patients all the way to constantly monitoring their specific conditioins.
+  </p>
+  <div>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card (click)="goToServiceDetails(1)">
+            <img src="assets/images/eyeExam.JPG" />
+            <ion-card-content>
+              <ion-card-title class="title">
+                DIGITAL RETINA SCREENING
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
 
+        <ion-col>
+          <ion-card (click)="goToServiceDetails(2)">
+            <img src="assets/images/digital.JPG" />
+            <ion-card-content>
+              <ion-card-title class="title">
+                ADVANCED RETINAL IMAGING
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-card (click)="goToServiceDetails(3)">
+            <img src="assets/images/laser.JPG" />
+            <ion-card-content>
+              <ion-card-title class="title">
+                PATTERN LASER TREATMENT
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card (click)="goToServiceDetails(4)">
+            <img src="assets/images/retina.JPG" />
+            <ion-card-content>
+              <ion-card-title class="title">
+                OTHER ADVANCED RETINAL DIAGNOSTICS
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

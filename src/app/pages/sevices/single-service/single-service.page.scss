@@ -1,0 +1,37 @@
+.img-section {
+    width: 100%;
+    // margin-top: 3rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    .img-cont {
+        // box-shadow: 0 0 5px #DDD;
+        width: 80vw;
+        height: 40vh;
+        // border-radius: 80px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        img {
+            width: 100%;
+            height: 100%;
+            // border-radius: 80px;
+            object-fit: cover
+        }
+    }
+}
+
+ion-content{
+    h2{
+        color:#201872;
+    }
+    h5{
+        color: grey;
+        font-style: italic;
+    }
+    li{
+        color:#201872;
+    }
+}

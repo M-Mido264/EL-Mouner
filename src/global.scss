@@ -25,7 +25,7 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-ion-item{
+ion-item {
     --border-width: 0;
     --inner-border-width: 0;
     margin: 5px;
@@ -35,10 +35,14 @@ ion-item{
     --border-radius: 50px;
 }
 
-ion-input{
-    .item-inner { border-bottom-color: transparent !important; box-shadow: none !important; }
+ion-input {
+    .item-inner {
+        border-bottom-color: transparent !important;
+        box-shadow: none !important;
+    }
 }
-button{
+
+button {
     border-radius: 50px;
     background-color: #201872;
     color: #fff;
@@ -46,13 +50,15 @@ button{
     width: 110px;
 }
 
-ion-title{
+ion-title {
     text-align: center;
 }
 
-ion-searchbar{
-  border-radius: 50px;
-  background-color: skyblue;
+
+
+ion-searchbar {
+    border-radius: 50px;
+    background-color: skyblue;
 }
 
 
@@ -61,41 +67,48 @@ ion-searchbar{
     ion-content {
         --background: #26cad3;
     }
-    
-     ion-list {
-         padding: 30px 0 50px;
-         background: transparent;
-         ion-item {
+
+    ion-list {
+        padding: 30px 0 50px;
+        background: transparent;
+
+        ion-item {
             --background: transparent;
             // padding-left: 30px;
             --border-radius: 0px !important;
+
             .item-inner {
                 border-bottom: 1px solid white !important;
                 color: blue
             }
+
             ion-toggle {
                 direction: ltr;
                 --background-checked: linear-gradient(to top, #438ca3 0%, #55ad94 100%) !important;
                 --handle-background-checked: white;
             }
+
             ion-label {
                 color: #201872 !important;
                 margin-left: 10px;
                 //font-size: .8rem !important;
             }
-             ion-avatar {
+
+            ion-avatar {
                 // background: linear-gradient( to top, rgba(67, 140, 163, 1) 0%, rgba(85, 173, 148, 1) 100%);
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 width: 40px;
                 height: 40px;
+
                 img {
                     width: 30px;
                     height: 30px;
                     object-fit: contain;
                 }
             }
+
             ion-icon {
                 // color: #D3303A;
                 margin-left: 0;
@@ -107,13 +120,14 @@ ion-searchbar{
                 margin-right: .25rem;
                 display: inline-block;
             }
-       }
+        }
     }
 }
 
 .tool-tip-cont {
     position: relative;
     margin-top: 3rem;
+
     span {
         position: absolute;
         top: -37px;
@@ -125,6 +139,7 @@ ion-searchbar{
         z-index: 65;
         border-radius: 6px;
         font-size: 13px;
+
         &:after {
             left: 50%;
             border: solid transparent;
@@ -135,6 +150,7 @@ ion-searchbar{
             pointer-events: none;
             top: 95%;
         }
+
         &:after {
             border-color: rgba(0, 0, 0, 0);
             border-top-color: #f04141;
@@ -142,5 +158,19 @@ ion-searchbar{
             margin-left: 0;
             transform: translateX(-50%);
         }
+    }
+}
+
+.center {
+    margin: 50px auto;
+    width: 60%;
+    padding: 10px;
+
+    b {
+        color: grey;
+    }
+
+    p {
+        color: grey;
     }
 }

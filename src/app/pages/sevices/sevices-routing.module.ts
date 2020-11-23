@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: SevicesPage
+  },
+  {
+    path: 'single-service/:id',
+    loadChildren: () => import('./single-service/single-service.module').then( m => m.SingleServicePageModule)
   }
 ];
 

@@ -41,7 +41,7 @@ export class LoginPage implements OnInit {
 
 
   ionViewDidEnter() {
-    this.backButtonSubscription = this.platefrom.backButton.subscribe(
+    this.backButtonSubscription = this.platefrom.backButton.subscribeWithPriority(-1,
       async () => {
         navigator["app"].exitApp();
       }

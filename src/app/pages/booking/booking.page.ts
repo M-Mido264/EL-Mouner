@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-booking',
@@ -6,8 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./booking.page.scss'],
 })
 export class BookingPage implements OnInit {
+  backButtonSubscription;
+  constructor(private platefrom: Platform, private router: Router) { }
 
-  constructor() { }
+  ionViewWillEnter() {
+    this.backButtonSubscription = this.platefrom.backButton.subscribeWithPriority(1,
+      async () => {
+        this.router.navigate(["/tabs"]);
+      }
+    );
+  }
+  ionViewDidLeave() {
+    this.backButtonSubscription.unsubscribe();
+  }
 
   ngOnInit() {
   }

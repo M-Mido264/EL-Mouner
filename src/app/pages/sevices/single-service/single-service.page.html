@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+    <ion-title>
+      Service Details
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="serviceNo == 1">
+    <div class="img-section">
+      <div class="img-cont">
+          <img src="assets/images/DigitalRetinaScreening.png">
+      </div>
+  </div>
+  
+  <h2>DIGITAL RETINA SCREENING</h2>
+  <ul>
+    <li>Scans both eyes for any retinal problems in less than 30 seconds.</li>
+    <li>Avoids the need to dilate patients’ pupils. </li>
+    <li>Facilitates early detection and documentation. </li>
+    <li>Minimizes patients’ waiting time.</li>
+  </ul>
+  </div>
+  <div *ngIf="serviceNo == 2">
+    <div class="img-section">
+      <div class="img-cont">
+          <img src="assets/images/DigitalRetinaImaging.png" *ngIf="serviceNo == 2">
+      </div>
+  </div>
+  
+  <h2>ADVANCED RETINAL IMAGING</h2>
+  <h5>Fluorescein Angiography and OCT</h5>
+  <ul>
+    <li>Combines new imaging techniques.</li>
+    <li>Tests can be performed in one session.</li>
+    <li>Instant results.</li>
+  </ul>
+  </div>
+  <div *ngIf="serviceNo == 3">
+    <div class="img-section">
+      <div class="img-cont">
+          <img src="assets/images/PatternLaserTreatment.png" *ngIf="serviceNo == 3">
+      </div>
+  </div>
+  
+  <h2>PATTERN LASER TREATMENT and other laser procedures</h2>
+  <h5>
+    The fastest, most accurate laser machine manufactured worldwide for retinal therapy
+  </h5>
+  <ul>
+    <li>Among the latest and most accurate lasers worldwide.</li>
+    <li>Treats different retinal problems caused by diabetes.</li>
+    <li>Focuses on affected areas only.</li>
+    <li>Requires fewer sessions.</li>
+    <li>Saves time.</li>
+  </ul>
+  </div>
+  <div *ngIf="serviceNo == 4">
+    <div class="img-section">
+      <div class="img-cont">
+          <img src="assets/images/RetinalDiagnoses.png" *ngIf="serviceNo == 4">
+      </div>
+  </div>
+  
+  <h2>OTHER ADVANCED RETINAL DIAGNOSTICS </h2>
+  <h5>Intraocular Ultrasound and Visual Field Assessment</h5>
+  <ul>
+    <li>Help evaluate all ocular abnormalities associated with diabetes and other diseases.</li>
+  </ul>
+  </div>
+ 
+</ion-content>

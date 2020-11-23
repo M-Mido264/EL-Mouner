@@ -26,47 +26,65 @@
       </ion-segment-button>
     </ion-segment>
   </div>
-  <div [ngSwitch]="segment">
-    <ion-list *ngSwitchCase="'ARTICLES'">
-      <!-- <ion-item *ngFor="let a of articles">
-        <ion-thumbnail item-start>
-          <img class="img" src="{{a.photo}}">
-        </ion-thumbnail>
-        <h3 class="blue">{{a.title}}</h3>
+  <div [ngSwitch]="segment">  
+    <div class="cards-bg" *ngSwitchCase="'ARTICLES'">
+      <div class="ion-text-center center" *ngIf="Articles.length < 1">
+        <b>Sorry!</b>
+        <br>
+        <img src="assets/images/empty.png"/>
+        <br>
         <p>
-          {{a.body}}
+          There is no articles yet.
         </p>
-      </ion-item> -->
-      <b> ARTICLES </b>
-
-    </ion-list>
+      </div> 
+      <ion-card *ngFor="let a of Articles">
+        <img [src]="photoPath + a?.Photo"/>
+        <ion-card-content>
+          <ion-card-title>
+            {{a.Title}}
+          </ion-card-title>
+          <p class="customContainer" [class.show]="a.Visible">
+            {{a.Body}}
+          </p> <span style="color:  #201872;" (click)="a.Visible = !a.Visible">{{ a.Visible ? 'Show less': 'Show More' }}</span>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
   <div [ngSwitch]="segment">
-    <ion-list *ngSwitchCase="'NEWS'">
-      <!-- <ion-item *ngFor="let n of news">
-        <ion-thumbnail item-start>
-          <img class="img" src="{{n.photo}}">
-        </ion-thumbnail>
-        <h3 class="blue">{{n.title}}</h3>
+    <div class="cards-bg" *ngSwitchCase="'NEWS'">
+      <div class="ion-text-center center" *ngIf="News.length < 1">
+        <b>Sorry!</b>
+        <br>
+        <img src="assets/images/empty.png"/>
+        <br>
         <p>
-            {{n.body}}
+          There is no news yet.
         </p>
-      </ion-item> -->
-      <b>NEWS</b>
-    </ion-list>
+      </div> 
+      <ion-card *ngFor="let a of News">
+        <img [src]="photoPath + a?.Photo"/>
+        <ion-card-content>
+          <ion-card-title>
+            {{a.Title}}
+          </ion-card-title>
+          <p class="customContainer" [class.show]="a.Visible">
+            {{a.Body}}
+          </p> <span style="color:  #201872;" (click)="a.Visible = !a.Visible">{{ a.Visible ? 'Show less': 'Show More' }}</span>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
   <div [ngSwitch]="segment">
-    <ion-list *ngSwitchCase="'FEATURES'">
-      <!-- <ion-item *ngFor="let n of news">
-        <ion-thumbnail item-start>
-          <img class="img" src="{{n.photo}}">
-        </ion-thumbnail>
-        <h3 class="blue">{{n.title}}</h3>
+    <div class="cards-bg" *ngSwitchCase="'FEATURES'">
+      <div class="ion-text-center center">
+        <b>Sorry!</b>
+        <br>
+        <img src="assets/images/empty.png"/>
+        <br>
         <p>
-            {{n.body}}
+          There is no features yet.
         </p>
-      </ion-item> -->
-      <b>FEATURES</b>
-    </ion-list>
+      </div>     
+    </div>
   </div>
 </ion-content>

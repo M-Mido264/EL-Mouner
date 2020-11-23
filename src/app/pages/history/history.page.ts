@@ -11,16 +11,16 @@ export class HistoryPage implements OnInit {
   backButtonSubscription;
   constructor(private platefrom: Platform, private router: Router) { }
 
-  // ionViewWillEnter() {
-  //   this.backButtonSubscription = this.platefrom.backButton.subscribe(
-  //     async () => {
-  //       this.router.navigate(["/tabs/home"]);
-  //     }
-  //   );
-  // }
-  // ionViewDidLeave() {
-  //   this.backButtonSubscription.unsubscribe();
-  // }
+  ionViewWillEnter() {
+    this.backButtonSubscription = this.platefrom.backButton.subscribeWithPriority(1,
+      async () => {
+        this.router.navigate(["/tabs/home"]);
+      }
+    );
+  }
+  ionViewDidLeave() {
+    this.backButtonSubscription.unsubscribe();
+  }
 
   ngOnInit() {
   }

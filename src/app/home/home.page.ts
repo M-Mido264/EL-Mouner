@@ -1,16 +1,52 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertController, Platform } from '@ionic/angular';
+import { ArticlesOrNews } from '../models/ArticlesOrNews';
+import { Endpoints, Storage_URL } from '../services/api.endpoints';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit{
   show:Boolean = false;
   segment :string = 'ARTICLES';
   backButtonSubscription;
-  constructor(private platefrom: Platform,private alertController: AlertController) {}
+  Articles: ArticlesOrNews[]=[]
+  News: ArticlesOrNews[]=[]
+  photoPath:string
+  constructor(private platefrom: Platform,private alertController: AlertController,private dataService: DataService) {
+    this.photoPath = Storage_URL
+  }
+  
+  
+  ngOnInit(): void {
+    this.dataService.get(Endpoints.ArticlesAndNews).subscribe((res:any[])=>{
+       if(res && res.length > 0){
+           this.Articles = res.filter(x=>x.kind == true).map((element)=>({
+              Body : element.body,
+              HasNewPhoto : element.hasNewPhoto,
+              Id:element.id,
+              Kind: element.kind,
+              Photo: element.photo,
+              Title: element.title,
+              Visible: false
+           }));
+           console.log("🚀 ~ file: home.page.ts ~ line 26 ~ HomePage ~ ngOnInit ~ this.Articles", this.Articles)
+           this.News = res.filter(x=>x.kind == false).map((element)=>({
+              Body : element.body,
+              HasNewPhoto : element.hasNewPhoto,
+              Id:element.id,
+              Kind: element.kind,
+              Photo: element.photo,
+              Title: element.title,
+              Visible: false
+           }));
+           console.log("🚀 ~ file: home.page.ts ~ line 35 ~ HomePage ~ ngOnInit ~ this.News", this.News)
+       }
+    });
+  }
 
   showHideSearchBar(){
     this.show = !this.show;

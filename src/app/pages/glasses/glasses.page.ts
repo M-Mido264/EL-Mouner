@@ -9,18 +9,18 @@ import { Platform } from '@ionic/angular';
 })
 export class GlassesPage implements OnInit {
   backButtonSubscription
-  constructor(private platefrom: Platform) { }
+  constructor(private platefrom: Platform,private router: Router) { }
 
-  // ionViewWillEnter() {
-  //   this.backButtonSubscription = this.platefrom.backButton.subscribe(
-  //     async () => {
-  //       navigator["app"].exitApp();
-  //     }
-  //   );
-  // }
-  // ionViewDidLeave() {
-  //   this.backButtonSubscription.unsubscribe();
-  // }
+  ionViewWillEnter() {
+    this.backButtonSubscription = this.platefrom.backButton.subscribeWithPriority(1,
+      async () => {
+         this.router.navigateByUrl('tabs/home')
+      }
+    );
+  }
+  ionViewDidLeave() {
+    this.backButtonSubscription.unsubscribe();
+  }
 
   ngOnInit() {
   }
