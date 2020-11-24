@@ -14,19 +14,19 @@
 
 <ion-content padding [fullscreen]="true">
   <div padding>
-    <ion-segment [(ngModel)]="segment">
-      <ion-segment-button value="ARTICLES">
+    <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged()">
+      <ion-segment-button value="0">
         ARTICLES
       </ion-segment-button>
-      <ion-segment-button value="NEWS">
+      <ion-segment-button value="1">
         NEWS
       </ion-segment-button>
-      <ion-segment-button value="FEATURES">
+      <ion-segment-button value="2">
         FEATURES
       </ion-segment-button>
     </ion-segment>
   </div>
-  <div [ngSwitch]="segment">  
+  <!-- <div [ngSwitch]="segment">  
     <div class="cards-bg" *ngSwitchCase="'ARTICLES'">
       <div class="ion-text-center center" *ngIf="Articles.length < 1">
         <b>Sorry!</b>
@@ -49,8 +49,8 @@
         </ion-card-content>
       </ion-card>
     </div>
-  </div>
-  <div [ngSwitch]="segment">
+  </div> -->
+  <!-- <div [ngSwitch]="segment">
     <div class="cards-bg" *ngSwitchCase="'NEWS'">
       <div class="ion-text-center center" *ngIf="News.length < 1">
         <b>Sorry!</b>
@@ -73,8 +73,8 @@
         </ion-card-content>
       </ion-card>
     </div>
-  </div>
-  <div [ngSwitch]="segment">
+  </div> -->
+  <!-- <div [ngSwitch]="segment">
     <div class="cards-bg" *ngSwitchCase="'FEATURES'">
       <div class="ion-text-center center">
         <b>Sorry!</b>
@@ -86,5 +86,69 @@
         </p>
       </div>     
     </div>
-  </div>
+  </div> -->
+
+  <ion-slides #slides (ionSlideDidChange)="slideChanged()" scrollbar="true">
+    <ion-slide>
+      <div class="cards-bg">
+        <div class="ion-text-center center" *ngIf="Articles.length < 1">
+          <b>Sorry!</b>
+          <br>
+          <img src="assets/images/empty.png"/>
+          <br>
+          <p>
+            There is no articles yet.
+          </p>
+        </div> 
+        <ion-card *ngFor="let a of Articles">
+          <img [src]="photoPath + a?.Photo"/>
+          <ion-card-content>
+            <ion-card-title>
+              {{a.Title}}
+            </ion-card-title>
+            <p class="customContainer" [class.show]="a.Visible">
+              {{a.Body}}
+            </p> <span style="color:  #201872;" (click)="a.Visible = !a.Visible">{{ a.Visible ? 'Show less': 'Show More' }}</span>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="cards-bg">
+        <div class="ion-text-center center" *ngIf="News.length < 1">
+          <b>Sorry!</b>
+          <br>
+          <img src="assets/images/empty.png"/>
+          <br>
+          <p>
+            There is no news yet.
+          </p>
+        </div> 
+        <ion-card *ngFor="let a of News">
+          <img [src]="photoPath + a?.Photo"/>
+          <ion-card-content>
+            <ion-card-title>
+              {{a.Title}}
+            </ion-card-title>
+            <p class="customContainer" [class.show]="a.Visible">
+              {{a.Body}}
+            </p> <span style="color:  #201872;" (click)="a.Visible = !a.Visible">{{ a.Visible ? 'Show less': 'Show More' }}</span>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="cards-bg">
+        <div class="ion-text-center center">
+          <b>Sorry!</b>
+          <br>
+          <img src="assets/images/empty.png"/>
+          <br>
+          <p>
+            There is no features yet.
+          </p>
+        </div>     
+      </div>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

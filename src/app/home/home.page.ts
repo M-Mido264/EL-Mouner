@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertController, Platform } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AlertController, IonSlides, Platform } from '@ionic/angular';
 import { ArticlesOrNews } from '../models/ArticlesOrNews';
 import { Endpoints, Storage_URL } from '../services/api.endpoints';
 import { DataService } from '../services/data.service';
@@ -11,11 +11,12 @@ import { DataService } from '../services/data.service';
 })
 export class HomePage implements OnInit{
   show:Boolean = false;
-  segment :string = 'ARTICLES';
+  segment = 0;
   backButtonSubscription;
   Articles: ArticlesOrNews[]=[]
   News: ArticlesOrNews[]=[]
   photoPath:string
+  @ViewChild('slides', { static: true }) slider: IonSlides;
   constructor(private platefrom: Platform,private alertController: AlertController,private dataService: DataService) {
     this.photoPath = Storage_URL
   }
@@ -48,6 +49,8 @@ export class HomePage implements OnInit{
     });
   }
 
+  
+
   showHideSearchBar(){
     this.show = !this.show;
   }
@@ -65,8 +68,8 @@ export class HomePage implements OnInit{
 
   async closeApp() {
     const alert = await this.alertController.create({
-      header: "Cnfirmation",
-      message: "Do you want realy close the app",
+      header: "Confirmation",
+      message: "Do you really want to exit the app",
       buttons: [
         {
           text: "Cancel",
@@ -86,6 +89,14 @@ export class HomePage implements OnInit{
     });
 
     alert.present();
+  }
+
+  async segmentChanged() {
+    await this.slider.slideTo(this.segment);
+  }
+
+  async slideChanged() {
+    this.segment = await this.slider.getActiveIndex();
   }
 }
 
