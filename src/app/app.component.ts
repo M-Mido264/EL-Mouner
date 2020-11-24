@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { Endpoints } from './services/api.endpoints';
 import { SharedService } from './services/shared.service';
+import { AndroidPermissions } from "@ionic-native/android-permissions/ngx";
 
 @Component({
   selector: "app-root",
@@ -19,6 +20,7 @@ import { SharedService } from './services/shared.service';
 })
 export class AppComponent {
   menuSide = "start";
+  userName:string;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -28,8 +30,12 @@ export class AppComponent {
     private dataService: DataService,
     private router: Router,
     public loading: LoadingController,
-    private sharedService: SharedService
+    private androidPermissions: AndroidPermissions,
+    public sharedService: SharedService
   ) {
+    this.platform.ready().then(() => {
+      this.checkNetworkPermission();
+    });
     this.initializeApp();
   }
 
@@ -47,6 +53,7 @@ export class AppComponent {
 
   async CheckAuthentication() {
     if (this.userService.isAuthenticated()) {
+      this.sharedService.UserName = localStorage.getItem("userName");
       this.router.navigate(["/tabs"]);
     } else {
       const userName = localStorage.getItem("userName");
@@ -75,6 +82,7 @@ export class AppComponent {
                 this.sharedService.accessToken = res.access_token;
                 this.sharedService.userId = res.clientId;
                 this.sharedService.patientId = res.patientId;
+                this.sharedService.UserName = res.userName;
                 localStorage.setItem("accessToken", res.access_token);
                 localStorage.setItem("userName", res.userName);
                 localStorage.setItem("password", password);
@@ -97,8 +105,49 @@ export class AppComponent {
   goToTwitter() {
     this.inAppBrowser.create("https://twitter.com/AlmouneerDEC/");
   }
+  goToInstagram() {
+    this.inAppBrowser.create("https://www.instagram.com/almouneer/");
+  }
 
   logout() {
     this.dataService.logout();
+  }
+
+  checkNetworkPermission() {
+    this.androidPermissions
+      .checkPermission(
+        this.androidPermissions.PERMISSION.ACCESS_NETWORK_STATE
+      )
+      .then(
+        (result) => {
+          if (result.hasPermission) {
+            console.log('had network permissions')
+          } else {
+            //If not having permission ask for permission
+            this.androidPermissions
+          .requestPermission(
+            this.androidPermissions.PERMISSION.ACCESS_NETWORK_STATE
+          )
+          .then(
+            () => {
+              // call method to turn on network
+              console.log(
+                "requestPermission Error requesting netwok permissions granted"
+              );
+            },
+            (error) => {
+              //Show alert if user click on 'No Thanks'
+              console.log(
+                "requestPermission Error requesting network permissions " +
+                  error
+              );
+            }
+          );
+          }
+        },
+        (err) => {
+          alert(err);
+        }
+      );
   }
 }

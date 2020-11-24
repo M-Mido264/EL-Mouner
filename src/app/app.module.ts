@@ -12,6 +12,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpConfigInterceptor } from './services/http-error.interceptor';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 export function tokenGetter() {
   return localStorage.getItem('Cloudtoken');
 }
@@ -33,6 +34,7 @@ export function tokenGetter() {
   providers: [
     StatusBar,
     SplashScreen,
+    AndroidPermissions,
     { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

@@ -8,19 +8,19 @@
                     <ion-img [src]="'assets/images/profile.png'"></ion-img>
                 </ion-avatar>
                     <ion-label style="font-weight: bold;">
-                        User Name
+                        {{sharedService.UserName}}
                     </ion-label>
                 </ion-item>
             </ion-menu-toggle>
 
-            <ion-menu-toggle auto-hide="true">
+            <!-- <ion-menu-toggle auto-hide="true">
               <ion-item routerLink="/tabs/home">
                   <ion-icon name="home" slot="start"></ion-icon>
                   <ion-label>
                       Home
                   </ion-label>
               </ion-item>
-          </ion-menu-toggle>
+          </ion-menu-toggle> -->
 
             <ion-menu-toggle auto-hide="true">
                 <ion-item routerLink="/sevices">
@@ -81,7 +81,7 @@
               <br>
               <ion-icon class="ion" (click)="goTofacebookPage()"  name="logo-facebook"></ion-icon>
               <ion-icon class="ion" (click)="goToTwitter()"  name="logo-twitter"></ion-icon>
-              <ion-icon class="ion" name="logo-instagram"></ion-icon>
+              <ion-icon class="ion" (click)="goToInstagram()" name="logo-instagram"></ion-icon>
               <hr class="customHr">
               <ion-icon name="call"></ion-icon><span class="white">(+02)3762 4276</span>
               <br>

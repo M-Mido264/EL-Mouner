@@ -1,0 +1,19 @@
+ion-content{
+    h2{
+        color:#201872;
+    }
+    h4{
+        color: grey;
+        font-style: italic;
+    }
+    p{
+        color:#201872;
+        span{
+            font-weight: bold;
+        }
+        ion-icon{
+            padding-left: 5px;
+            color:#201872;
+        }
+    }
+}

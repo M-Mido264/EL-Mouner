@@ -160,6 +160,7 @@ export class DataService {
     this.sharedService.userId = null;
     this.sharedService.accessToken = null;
     this.sharedService.patientId = null;
+    this.sharedService.UserName = null;
     this.sharedService.profileData = null;
     this.sharedService.lang = null;
     // localStorage.removeItem('lang');

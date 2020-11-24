@@ -17,6 +17,7 @@ import { MenuController } from '@ionic/angular';
    _lang;
    _RefusedReasons;
    _profileData;
+   _UserName;
 
    set RefusedReasons(data) {
      this._RefusedReasons = data;
@@ -30,6 +31,12 @@ import { MenuController } from '@ionic/angular';
    }
    get accessToken() {
      return this._accessToken;
+   }
+   set UserName(data:string) {
+     this._UserName = data != null ? data.split('@')[0] : null;
+   }
+   get UserName() {
+     return this._UserName;
    }
 
    set userId(data) {

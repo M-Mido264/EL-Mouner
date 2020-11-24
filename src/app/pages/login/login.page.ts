@@ -86,6 +86,7 @@ export class LoginPage implements OnInit {
               this.sharedService.accessToken = res.access_token;
               this.sharedService.userId = res.clientId;
               this.sharedService.patientId = res.patientId;
+              this.sharedService.UserName = res.userName;
                 localStorage.setItem("accessToken", res.access_token);
                 localStorage.setItem("userName", res.userName);
                 localStorage.setItem("password", this.LoginForm.value.Password);
