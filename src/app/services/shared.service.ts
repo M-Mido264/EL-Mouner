@@ -100,7 +100,7 @@ import { MenuController } from '@ionic/angular';
    }
 
    displayImg(img, is_online = true) {
-     if (img == null || img == "") return "assets/images/no-img.png";
+     if (img == null || img == "") return "assets/images/profile.png";
      if (is_online) {
        return img;
      } else {

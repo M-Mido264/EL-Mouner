@@ -12,10 +12,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class DataService {
-  profileImage;
-  profile;
-  default_lang; 
-  menuSide;
+
   constructor(private httpClient: HttpClient,private router: Router,
     // private translate: TranslateService,
     public storage: Storage,
@@ -130,20 +127,17 @@ export class DataService {
     });
   }
 
-  // getProfileData() {
-  //   this.secure_get(Endpoints.getProfile, {CaptainId: this.sharedService.userId})
-  //   .subscribe( (profileData: any) => {
-  //     this.profile = profileData;
-  //     this.profileImage = [profileData.personalPhoto || 'assets/images/profile.png'];
-  //     this.sharedService.profileData = profileData;
-  //     this.storage.set('ProfileData', profileData || {});
-  //   },err=>{
-  //     if(err.status == 401){
-  //       this.logout();
-  //       this.createEnAlert("ThisAccountIsNotActive");
-  //     }
-  //   });
-  // }
+  getProfileData() {
+    this.secure_get(Endpoints.Patient, {patientId: this.sharedService.patientId})
+    .subscribe( (profileData: any) => {
+      this.sharedService.profileData = profileData;
+      localStorage.setItem("profileData",profileData);
+    },err=>{
+      if(err.status == 401){
+        this.logout();
+      }
+    });
+  }
   // createEnAlert(message: string) {
   //   this.alertCtrl
   //     .create({
@@ -169,6 +163,7 @@ export class DataService {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userId');
     localStorage.removeItem('patientId');
+    localStorage.removeItem('profileData');
     
     this.storage.remove('userId').then(() => {
     }).then(() => {

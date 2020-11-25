@@ -1,61 +1,84 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertController, IonSlides, Platform } from '@ionic/angular';
+import { AlertController, IonSlides, LoadingController, Platform } from '@ionic/angular';
+import { finalize } from 'rxjs/operators';
 import { ArticlesOrNews } from '../models/ArticlesOrNews';
 import { Endpoints, Storage_URL } from '../services/api.endpoints';
 import { DataService } from '../services/data.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: "app-home",
+  templateUrl: "home.page.html",
+  styleUrls: ["home.page.scss"],
 })
-export class HomePage implements OnInit{
-  show:Boolean = false;
+export class HomePage implements OnInit {
+  show: Boolean = false;
   segment = 0;
   backButtonSubscription;
-  Articles: ArticlesOrNews[]=[]
-  News: ArticlesOrNews[]=[]
-  photoPath:string
-  @ViewChild('slides', { static: true }) slider: IonSlides;
-  constructor(private platefrom: Platform,private alertController: AlertController,private dataService: DataService) {
-    this.photoPath = Storage_URL
+  Articles: ArticlesOrNews[] = [];
+  News: ArticlesOrNews[] = [];
+  photoPath: string;
+  @ViewChild("slides", { static: true }) slider: IonSlides;
+  constructor(
+    private platefrom: Platform,
+    private alertController: AlertController,
+    private dataService: DataService,
+    public loading: LoadingController
+  ) {
+    this.photoPath = Storage_URL;
   }
-  
-  
-  ngOnInit(): void {
-    this.dataService.get(Endpoints.ArticlesAndNews).subscribe((res:any[])=>{
-       if(res && res.length > 0){
-           this.Articles = res.filter(x=>x.kind == true).map((element)=>({
-              Body : element.body,
-              HasNewPhoto : element.hasNewPhoto,
-              Id:element.id,
-              Kind: element.kind,
-              Photo: element.photo,
-              Title: element.title,
-              Visible: false
-           }));
-           console.log("🚀 ~ file: home.page.ts ~ line 26 ~ HomePage ~ ngOnInit ~ this.Articles", this.Articles)
-           this.News = res.filter(x=>x.kind == false).map((element)=>({
-              Body : element.body,
-              HasNewPhoto : element.hasNewPhoto,
-              Id:element.id,
-              Kind: element.kind,
-              Photo: element.photo,
-              Title: element.title,
-              Visible: false
-           }));
-           console.log("🚀 ~ file: home.page.ts ~ line 35 ~ HomePage ~ ngOnInit ~ this.News", this.News)
-       }
+
+  async ngOnInit() {
+    const loader = await this.loading.create({
+      message:
+        "Loading...",
+      spinner: "crescent"
+    });
+    this.dataService.get(Endpoints.ArticlesAndNews).pipe(
+      finalize(() => {
+        loader.dismiss();
+      })
+    ).subscribe((res: any[]) => {
+      if (res && res.length > 0) {
+        this.Articles = res
+          .filter((x) => x.kind == true)
+          .map((element) => ({
+            Body: element.body,
+            HasNewPhoto: element.hasNewPhoto,
+            Id: element.id,
+            Kind: element.kind,
+            Photo: element.photo,
+            Title: element.title,
+            Visible: false,
+          }));
+        console.log(
+          "🚀 ~ file: home.page.ts ~ line 26 ~ HomePage ~ ngOnInit ~ this.Articles",
+          this.Articles
+        );
+        this.News = res
+          .filter((x) => x.kind == false)
+          .map((element) => ({
+            Body: element.body,
+            HasNewPhoto: element.hasNewPhoto,
+            Id: element.id,
+            Kind: element.kind,
+            Photo: element.photo,
+            Title: element.title,
+            Visible: false,
+          }));
+        console.log(
+          "🚀 ~ file: home.page.ts ~ line 35 ~ HomePage ~ ngOnInit ~ this.News",
+          this.News
+        );
+      }
     });
   }
 
-  
-
-  showHideSearchBar(){
+  showHideSearchBar() {
     this.show = !this.show;
   }
   ionViewDidEnter() {
-    this.backButtonSubscription = this.platefrom.backButton.subscribeWithPriority(0,
+    this.backButtonSubscription = this.platefrom.backButton.subscribeWithPriority(
+      0,
       async () => {
         this.closeApp();
         //navigator["app"].exitApp();
@@ -75,17 +98,17 @@ export class HomePage implements OnInit{
           text: "Cancel",
           role: "cancel",
           cssClass: "secondary",
-          handler: blah => {
+          handler: (blah) => {
             alert.dismiss();
-          }
+          },
         },
         {
           text: "Ok",
           handler: () => {
             navigator["app"].exitApp();
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
 
     alert.present();

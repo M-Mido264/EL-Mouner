@@ -21,13 +21,14 @@ import { AndroidPermissions } from "@ionic-native/android-permissions/ngx";
 export class AppComponent {
   menuSide = "start";
   userName:string;
+  profileData:any;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private inAppBrowser: InAppBrowser,
     private userService: UserService,
-    private dataService: DataService,
+    public dataService: DataService,
     private router: Router,
     public loading: LoadingController,
     private androidPermissions: AndroidPermissions,
@@ -54,6 +55,7 @@ export class AppComponent {
   async CheckAuthentication() {
     if (this.userService.isAuthenticated()) {
       this.sharedService.UserName = localStorage.getItem("userName");
+      this.sharedService.profileData = JSON.stringify(localStorage.getItem("profileData"));
       this.router.navigate(["/tabs"]);
     } else {
       const userName = localStorage.getItem("userName");
@@ -88,6 +90,9 @@ export class AppComponent {
                 localStorage.setItem("password", password);
                 localStorage.setItem("userId", res.clientId);
                 localStorage.setItem("patientId", res.patientId);
+                if(res.patientId){
+                  this.dataService.getProfileData();
+                }
                 this.router.navigate(["/tabs"]);
               }
             },

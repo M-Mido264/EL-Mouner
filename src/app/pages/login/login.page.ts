@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController, Platform, ToastController } from '@ionic/angular';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Router } from '@angular/router';
@@ -92,6 +92,9 @@ export class LoginPage implements OnInit {
                 localStorage.setItem("password", this.LoginForm.value.Password);
                 localStorage.setItem("userId", res.clientId);
                 localStorage.setItem("patientId", res.patientId);
+                if(res.patientId){
+                  this.dataService.getProfileData();
+                }
                 this.router.navigate(["/tabs"]);
                 this.LoginForm.reset();
                 this.isSigned = false;
