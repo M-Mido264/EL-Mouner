@@ -55,6 +55,8 @@ export class AppComponent {
   async CheckAuthentication() {
     if (this.userService.isAuthenticated()) {
       this.sharedService.UserName = localStorage.getItem("userName");
+      this.sharedService.patientId = localStorage.getItem("patientId");
+      this.sharedService.userId = localStorage.getItem("userId");
       this.sharedService.profileData = JSON.stringify(localStorage.getItem("profileData"));
       this.router.navigate(["/tabs"]);
     } else {

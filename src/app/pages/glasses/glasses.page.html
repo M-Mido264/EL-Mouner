@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar color="secondary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -6,14 +6,11 @@
     <ion-title>
       Glasses
     </ion-title>
-    <!-- <ion-buttons slot="end">
-      <ion-searchbar></ion-searchbar>
-    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-text-center center">
+<ion-content class="ion-padding">
+  <div class="ion-text-center center" *ngIf="Glasses.length == 0 || !sharedService.patientId">
     <b>Sorry!</b>
     <br>
     <img src="assets/images/empty.png"/>
@@ -21,5 +18,31 @@
     <p>
       There is no glasses yet.
     </p>
-  </div> 
+  </div>
+  
+  <ion-card>
+    <ion-card-header>
+      Dr.Name
+    </ion-card-header>
+    <ion-card-content>
+      Date: 22/10/2020
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      Dr.Name
+    </ion-card-header>
+    <ion-card-content>
+      <span>Date :</span> 22/10/2020
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      Dr.Name
+    </ion-card-header>
+    <ion-card-content>
+      Date: 22/10/2020
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

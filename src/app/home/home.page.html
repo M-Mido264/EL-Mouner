@@ -26,9 +26,9 @@
       </ion-segment-button>
     </ion-segment>
   </div>
-  <!-- <div [ngSwitch]="segment">  
-    <div class="cards-bg" *ngSwitchCase="'ARTICLES'">
-      <div class="ion-text-center center" *ngIf="Articles.length < 1">
+  <div [ngSwitch]="segment">  
+    <div class="cards-bg" *ngSwitchCase="'0'">
+      <div class="ion-text-center center" *ngIf="!IsLoading && Articles.length < 1">
         <b>Sorry!</b>
         <br>
         <img src="assets/images/empty.png"/>
@@ -49,10 +49,10 @@
         </ion-card-content>
       </ion-card>
     </div>
-  </div> -->
-  <!-- <div [ngSwitch]="segment">
-    <div class="cards-bg" *ngSwitchCase="'NEWS'">
-      <div class="ion-text-center center" *ngIf="News.length < 1">
+  </div> 
+  <div [ngSwitch]="segment">
+    <div class="cards-bg" *ngSwitchCase="'1'">
+      <div class="ion-text-center center" *ngIf="!IsLoading && News.length < 1">
         <b>Sorry!</b>
         <br>
         <img src="assets/images/empty.png"/>
@@ -73,10 +73,10 @@
         </ion-card-content>
       </ion-card>
     </div>
-  </div> -->
-  <!-- <div [ngSwitch]="segment">
-    <div class="cards-bg" *ngSwitchCase="'FEATURES'">
-      <div class="ion-text-center center">
+  </div>
+   <div [ngSwitch]="segment">
+    <div class="cards-bg" *ngSwitchCase="'2'">
+      <div class="ion-text-center center" *ngIf="!IsLoading">
         <b>Sorry!</b>
         <br>
         <img src="assets/images/empty.png"/>
@@ -86,9 +86,9 @@
         </p>
       </div>     
     </div>
-  </div> -->
+  </div>
 
-  <ion-slides #slides (ionSlideDidChange)="slideChanged()" scrollbar="true">
+  <!-- <ion-slides #slides (ionSlideDidChange)="slideChanged()" scrollbar="true">
     <ion-slide>
       <div class="cards-bg">
         <div class="ion-text-center center" *ngIf="Articles.length < 1">
@@ -108,7 +108,7 @@
             </ion-card-title>
             <p class="customContainer" [class.show]="a.Visible">
               {{a.Body}}
-            </p> <span style="color:  #201872;" (click)="a.Visible = !a.Visible">{{ a.Visible ? 'Show less': 'Show More' }}</span>
+            </p> <span style="color:  #201872;" (click)="a.Visible = !a.Visible">{{ a.Visible ? 'Show Less': 'Show More' }}</span>
           </ion-card-content>
         </ion-card>
       </div>
@@ -132,7 +132,7 @@
             </ion-card-title>
             <p class="customContainer" [class.show]="a.Visible">
               {{a.Body}}
-            </p> <span style="color:  #201872;" (click)="a.Visible = !a.Visible">{{ a.Visible ? 'Show less': 'Show More' }}</span>
+            </p> <span style="color:  #201872;" (click)="a.Visible = !a.Visible">{{ a.Visible ? 'Show Less': 'Show More' }}</span>
           </ion-card-content>
         </ion-card>
       </div>
@@ -150,5 +150,5 @@
         </div>     
       </div>
     </ion-slide>
-  </ion-slides>
+  </ion-slides> -->
 </ion-content>

@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: GlassesPage
+  },
+  {
+    path: 'optometer/:id',
+    loadChildren: () => import('./optometer/optometer.module').then( m => m.OptometerPageModule)
   }
 ];
 

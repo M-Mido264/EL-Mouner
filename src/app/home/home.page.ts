@@ -17,6 +17,7 @@ export class HomePage implements OnInit {
   Articles: ArticlesOrNews[] = [];
   News: ArticlesOrNews[] = [];
   photoPath: string;
+  IsLoading:Boolean = true;
   @ViewChild("slides", { static: true }) slider: IonSlides;
   constructor(
     private platefrom: Platform,
@@ -33,9 +34,11 @@ export class HomePage implements OnInit {
         "Loading...",
       spinner: "crescent"
     });
+    await loader.present();
     this.dataService.get(Endpoints.ArticlesAndNews).pipe(
       finalize(() => {
         loader.dismiss();
+        this.IsLoading = false;
       })
     ).subscribe((res: any[]) => {
       if (res && res.length > 0) {

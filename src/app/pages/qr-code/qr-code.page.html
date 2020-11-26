@@ -10,6 +10,8 @@
 </ion-header>
 
 <ion-content class="ion-text-center ion-padding" >
-  <button (click)="scan()">Scan <ion-icon name="qr-code"></ion-icon></button>
-   {{scanedCode}}
+  <button (click)="scan()">Scan <ion-icon name="qr-code"></ion-icon></button><br>
+  <div *ngIf="scanedCode">
+    <span>Find your attachement here :</span><a href="{{scanedCode?.text}}"> {{scanedCode?.text}} </a>
+  </div>
 </ion-content>

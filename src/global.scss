@@ -165,7 +165,9 @@ ion-searchbar {
     margin: 50px auto;
     // width: 60%;
     padding: 10px;
-
+    img{
+        max-width: 60%;
+    }
     b {
         color: grey;
     }
