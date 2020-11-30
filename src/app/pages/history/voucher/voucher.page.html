@@ -1,9 +1,59 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>voucher</ion-title>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Voucher
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <div class="row">
+    <div class="col-md-6">
+      <span>Visit Date :</span> {{History?.VisitDate | date:'dd/MM/yyy'}}
+    </div>
+    <div class="col-md-6">
+      <span>Doctor :</span> {{History?.DoctorName}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <span>Contract :</span> {{History?.Contract}}
+    </div>
+    <div class="col-md-6">
+      <span>Branch :</span> {{History?.Branch}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <span>Patient :</span> {{sharedService.profileData?.fNameEn}} {{sharedService.profileData?.middleNameEn}}
+      {{sharedService.profileData?.lastNameEn}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <span>Services :</span> {{History?.Service}}
+    </div>
+  </div>
+  <br>
+  <!-- <h3>
+    Vouchers
+  </h3> -->
+  <div *ngFor="let item of History?.Vouchers let i=index">
+    <h5>VoucherNo.{{i+1}}</h5>
+    <ul>
+      <li>
+        <span>Service Name:</span> {{item.serviceName}}
+      </li>
+      <li>
+        <span>Eye Type:</span> {{item.eyeTypeName}}
+      </li>
+      <li>
+        <span>Cost:</span> {{item.cost}}
+      </li>
+    </ul>
+  </div>
 
 </ion-content>

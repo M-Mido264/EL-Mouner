@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <div class="ion-text-center center">
+  <div class="ion-text-center center" *ngIf="!IsLoading && Histories.length < 1">
     <b>Sorry!</b>
     <br>
     <img src="assets/images/empty.png"/>
@@ -18,5 +18,17 @@
     <p>
       There is no history yet.
     </p>
-  </div> 
+  </div>
+
+  <div *ngIf="Histories.length > 0">
+    <ion-card *ngFor="let item of Histories" (click)="openDetails(item)">
+      <ion-card-header>
+        Dr.Name: {{item.DoctorName}}
+      </ion-card-header>
+      <ion-card-content>
+        Date: {{item.VisitDate | date:'dd/MM/yyy'}}
+      </ion-card-content>
+    </ion-card>      
+  </div>
+ 
 </ion-content>
