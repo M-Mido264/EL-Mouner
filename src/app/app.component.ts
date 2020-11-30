@@ -57,8 +57,9 @@ export class AppComponent {
       this.sharedService.UserName = localStorage.getItem("userName");
       this.sharedService.patientId = localStorage.getItem("patientId");
       this.sharedService.userId = localStorage.getItem("userId");
-      this.sharedService.profileData = JSON.stringify(localStorage.getItem("profileData"));
-      this.router.navigate(["/tabs"]);
+      const obj = localStorage.getItem("profileData");
+      this.sharedService.profileData = JSON.parse(obj);
+      this.router.navigate(["/tabs/home"]);
     } else {
       const userName = localStorage.getItem("userName");
       const password = localStorage.getItem("password");

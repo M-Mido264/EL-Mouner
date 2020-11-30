@@ -17,7 +17,7 @@ export class HomePage implements OnInit {
   Articles: ArticlesOrNews[] = [];
   News: ArticlesOrNews[] = [];
   photoPath: string;
-  IsLoading:Boolean = true;
+  IsLoading:Boolean = false;
   @ViewChild("slides", { static: true }) slider: IonSlides;
   constructor(
     private platefrom: Platform,
@@ -29,6 +29,13 @@ export class HomePage implements OnInit {
   }
 
   async ngOnInit() {
+    this.getData();
+  }
+
+  async getData(){
+    this.Articles = [];
+    this.News = [];
+    this.IsLoading = true;
     const loader = await this.loading.create({
       message:
         "Loading...",
@@ -87,6 +94,7 @@ export class HomePage implements OnInit {
         //navigator["app"].exitApp();
       }
     );
+    //this.getData();
   }
   ionViewWillLeave() {
     this.backButtonSubscription.unsubscribe();

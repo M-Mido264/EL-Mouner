@@ -15,14 +15,14 @@
       <img [src]="sharedService.displayImg(sharedService.profileData?.photo)">
     </div>
   </div>
-  <p><span>FirstName :</span> mohamed</p>
-  <p><span>MiddleName :</span> mohamed</p>
-  <p><span>LastName :</span> mohamed</p>
-  <p><span>SSN :</span> mohamed</p>
-  <p><span>PatientNo :</span> mohamed</p>
-  <p><span>Email :</span> mohamed</p>
-  <p><span>Mobile :</span> mohamed</p>
-  <p><span>Country :</span> mohamed</p>
-  <p><span>City :</span> mohamed</p>
-  <p><span>Address :</span> mohamed</p>
+  <p><span>FirstName :</span> {{sharedService.profileData?.fNameEn}}</p>
+  <p><span>MiddleName :</span> {{sharedService.profileData?.middleNameEn}}</p>
+  <p><span>LastName :</span> {{sharedService.profileData?.lastNameEn}}</p>
+  <p><span>SSN :</span> {{sharedService.profileData?.personalIdNumber}}</p>
+  <p><span>PatientNo :</span> {{sharedService.profileData?.patientNumber}}</p>
+  <p><span>Email :</span> {{Email}}</p>
+  <p><span>Mobile :</span> {{sharedService.profileData?.address?.mobile}}</p>
+  <p><span>Country :</span> {{sharedService.profileData?.address?.country}}</p>
+  <p><span>City :</span> {{sharedService.profileData?.address?.city}}</p>
+  <p><span>Address :</span> {{sharedService.profileData?.address?.address}}</p>
 </ion-content>

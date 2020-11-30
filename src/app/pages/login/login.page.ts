@@ -95,7 +95,7 @@ export class LoginPage implements OnInit {
                 if(res.patientId){
                   this.dataService.getProfileData();
                 }
-                this.router.navigate(["/tabs"]);
+                this.router.navigate(["/tabs/home"]);
                 this.LoginForm.reset();
                 this.isSigned = false;
             }

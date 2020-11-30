@@ -1,4 +1,5 @@
 export class Glasses{
-    DoctorName:string;
+    Doctor:any;
     VisitDate:Date;
+    Id:string;
 }

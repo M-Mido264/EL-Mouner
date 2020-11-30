@@ -10,6 +10,8 @@ import { SharedService } from 'src/app/services/shared.service';
 })
 export class ProfilePage implements OnInit {
   backButtonSubscription;
+  Email:string;
+  UserProfile:any;
   constructor(
     private platform: Platform,
     private router: Router,
@@ -28,5 +30,8 @@ export class ProfilePage implements OnInit {
     this.backButtonSubscription.unsubscribe();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.Email = localStorage.getItem("userName");
+    console.log("🚀 ~ file: profile.page.ts ~ line 37 ~ ProfilePage ~ ngOnInit ~ this.UserProfile", this.sharedService.profileData)
+  }
 }

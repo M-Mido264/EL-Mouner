@@ -9,40 +9,26 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <div class="ion-text-center center" *ngIf="Glasses.length == 0 || !sharedService.patientId">
+<ion-content>
+  <div class="ion-text-center center" *ngIf="!IsLoading && Glasses.length < 1">
     <b>Sorry!</b>
     <br>
     <img src="assets/images/empty.png"/>
     <br>
     <p>
-      There is no glasses yet.
+      There is no visits yet.
     </p>
   </div>
-  
-  <ion-card>
-    <ion-card-header>
-      Dr.Name
-    </ion-card-header>
-    <ion-card-content>
-      Date: 22/10/2020
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>
-      Dr.Name
-    </ion-card-header>
-    <ion-card-content>
-      <span>Date :</span> 22/10/2020
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>
-      Dr.Name
-    </ion-card-header>
-    <ion-card-content>
-      Date: 22/10/2020
-    </ion-card-content>
-  </ion-card>
 
+  <div *ngIf="Glasses.length > 0">
+    <ion-card *ngFor="let item of Glasses" (click)="openDetails(item.Id)">
+      <ion-card-header>
+        Dr.Name: {{item.Doctor.nameEn}}
+      </ion-card-header>
+      <ion-card-content>
+        Date: {{item.VisitDate | date:'dd/MM/yyy'}}
+      </ion-card-content>
+    </ion-card>      
+  </div>
+ 
 </ion-content>

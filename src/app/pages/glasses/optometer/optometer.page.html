@@ -2,13 +2,79 @@
   <ion-toolbar color="secondary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
-  </ion-buttons>
+    </ion-buttons>
     <ion-title>
       Optometer
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <div class="row">
+    <div class="col-md-6">
+      <span>Visit Date :</span> {{Visit?.visitDate | date:'dd/MM/yyy'}}
+    </div>
+    <div class="col-md-6">
+      <span>Doctor :</span> {{Visit?.doctorName}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <span>Patient :</span> {{sharedService.profileData?.fNameEn}} {{sharedService.profileData?.middleNameEn}}
+      {{sharedService.profileData?.lastNameEn}}
+    </div>
+  </div>
+  <br>
+  <div class="table_wrapper">
+    <table>
+      <tr>
+        <th rowspan="3" class="custom">AutoRef</th>
+      <tr>
+        <th colspan="4" class="custom">OD</th>
+        <th colspan="4" class="custom">OS</th>
+      </tr>
 
+      <tr>
+
+        <td class="custom">Spf.</td>
+        <td class="custom">Cyl.</td>
+        <td class="custom">Axis</td>
+        <td class="custom">V.A.</td>
+        <td class="custom">Spf.</td>
+        <td class="custom">Cyl.</td>
+        <td class="custom">Axis</td>
+        <td class="custom">V.A.</td>
+      </tr>
+
+
+      <tr>
+        <th class="custom">New Glasses</th>
+        <td>{{Visit?.newGlassODSphere}}</td>
+        <td>{{Visit?.newGlassODCylinder}}</td>
+        <td>{{Visit?.newGlassODAxis}}</td>
+        <td>{{Visit?.newGlassODVA}}</td>
+        <td>{{Visit?.newGlassOSSphere}}</td>
+        <td>{{Visit?.newGlassOSCylinder}}</td>
+        <td>{{Visit?.newGlassOSAxis}}</td>
+        <td>{{Visit?.newGlassOSVA}}</td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <div class="table_wrapper">
+    <table>
+      <tr>
+        <th class="custom">Add</th>
+        <td colspan="2">{{Visit?.addODSphere}}</td>
+        <td colspan="2">{{Visit?.addODVA}}</td>
+        <td colspan="2">{{Visit?.addOSSphere}}</td>
+        <td colspan="2">{{Visit?.addOSVA}}</td>
+      </tr>
+      <tr>
+        <th class="custom">IPD</th>
+        <td colspan="4">{{Visit?.newGlassIPD}}</td>
+        <td colspan="4">{{Visit?.addOSIPD}}</td>
+      </tr>
+    </table>
+  </div>
 </ion-content>

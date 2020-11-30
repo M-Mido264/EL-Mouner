@@ -1,0 +1,31 @@
+ion-content{
+    .row{
+        color:#201872;
+    }
+    
+    span{
+        font-weight: bold;
+    }
+    .table_wrapper{
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    table{
+        width: 100%;
+    }
+    table, th, td {
+        border: 1px solid #201872;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 5px;
+        text-align: center; 
+        color: #201872;   
+      }
+
+      .custom{
+          background-color: #d3d3d3;
+          font-weight: bold;
+      }
+}

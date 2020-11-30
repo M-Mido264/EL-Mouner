@@ -128,10 +128,11 @@ export class DataService {
   }
 
   getProfileData() {
-    this.secure_get(Endpoints.Patient, {patientId: this.sharedService.patientId})
+    //this.secure_get(Endpoints.Patient, {patientId: this.sharedService.patientId})
+    this.getWithId(Endpoints.Patient,this.sharedService.patientId)
     .subscribe( (profileData: any) => {
       this.sharedService.profileData = profileData;
-      localStorage.setItem("profileData",profileData);
+      localStorage.setItem("profileData",JSON.stringify(profileData));
     },err=>{
       if(err.status == 401){
         this.logout();
