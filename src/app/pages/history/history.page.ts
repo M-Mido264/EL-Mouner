@@ -64,12 +64,14 @@ export class HistoryPage implements OnInit {
           if (res && res.length > 0) {
             this.Histories = res.map((element) => ({
               DoctorName: element.doctorName,
-              VisitDate: element.createdDt,
+              VisitDate: element.date,
               Service: element.serviceName,
-              Vouchers: element.patientVouchers,
+              EyeTypeName: element.eyeTypeName,
               Contract: element.contractName,
-              Branch: element.branchName
-            }));
+              Branch: element.branchName,
+              Cost: element.cost
+            })).sort((val1, val2)=> {return new Date(val2.VisitDate).valueOf() - new 
+              Date(val1.VisitDate).valueOf()});
             console.log(
               "🚀 ~ file: home.page.ts ~ line 26 ~ HomePage ~ ngOnInit ~ this.Histories",
               this.Histories

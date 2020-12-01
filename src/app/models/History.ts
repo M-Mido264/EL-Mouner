@@ -1,8 +1,9 @@
 export class History {
   DoctorName: string;
   VisitDate: Date;
-  Service: any;
-  Vouchers: any;
+  Service: string;
+  EyeTypeName: string;
   Contract: string;
   Branch: string;
+  Cost: number;
 }

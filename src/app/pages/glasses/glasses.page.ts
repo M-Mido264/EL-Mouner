@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { LoadingController, Platform } from "@ionic/angular";
 import { finalize } from "rxjs/operators";
 import { Glasses } from "src/app/models/Glasses";
+import { Visit } from 'src/app/models/Visit';
 import { Endpoints } from "src/app/services/api.endpoints";
 import { DataService } from "src/app/services/data.service";
 import { SharedService } from "src/app/services/shared.service";
@@ -62,7 +63,7 @@ export class GlassesPage implements OnInit {
         .subscribe((res: any[]) => {
           console.log("🚀 ~ file: glasses.page.ts ~ line 64 ~ GlassesPage ~ .subscribe ~ res", res)
           if (res && res.length > 0) {
-            this.Glasses = res.reverse().filter(x=>x.basicData != null && ( x.basicData.newGlassODSphere 
+            this.Glasses = res.filter(x=>x.basicData != null && ( x.basicData.newGlassODSphere 
               || x.basicData.newGlassODCylinder
               || x.basicData.newGlassODAxis
               || x.basicData.newGlassODVA
@@ -80,7 +81,9 @@ export class GlassesPage implements OnInit {
               Doctor: element.doctor,
               VisitDate: element.createdDt,
               Id: element.id,
-            }));
+              BasicData: element.basicData
+            })).sort((val1, val2)=> {return new Date(val2.VisitDate).valueOf() - new 
+              Date(val1.VisitDate).valueOf()});
             console.log(
               "🚀 ~ file: home.page.ts ~ line 26 ~ HomePage ~ ngOnInit ~ this.Glasses",
               this.Glasses
@@ -90,11 +93,25 @@ export class GlassesPage implements OnInit {
     }
   }
 
-  openDetails(visitID: string) {
-    console.log(
-      "🚀 ~ file: glasses.page.ts ~ line 79 ~ GlassesPage ~ openDetails ~ visitID",
-      visitID
-    );
-    this.router.navigate(["tabs/glasses/optometer", visitID]);
+  openDetails(item: Glasses) {
+    var visit = new Visit();
+    visit.doctorName = item.Doctor.nameEn;
+    visit.visitDate = item.VisitDate;
+    visit.addODSphere = item.BasicData.addODSphere
+    visit.addODVA = item.BasicData.addODVA
+    visit.addOSIPD = item.BasicData.addOSIPD 
+    visit.addOSSphere = item.BasicData.addOSSphere
+    visit.addOSVA = item.BasicData.addOSVA
+    visit.newGlassIPD = item.BasicData.newGlassIPD
+    visit.newGlassODAxis = item.BasicData.newGlassODAxis
+    visit.newGlassODCylinder = item.BasicData.newGlassODCylinder
+    visit.newGlassODSphere = item.BasicData.newGlassODSphere
+    visit.newGlassODVA = item.BasicData.newGlassODVA
+    visit.newGlassOSAxis = item.BasicData.newGlassOSAxis
+    visit.newGlassOSCylinder = item.BasicData.newGlassOSCylinder
+    visit.newGlassOSSphere = item.BasicData.newGlassOSSphere
+    visit.newGlassOSVA = item.BasicData.newGlassOSVA
+    localStorage.setItem("glassesDetails",JSON.stringify(visit));
+    this.router.navigate(["tabs/glasses/optometer"]);
   }
 }

@@ -13,7 +13,6 @@ import { SharedService } from 'src/app/services/shared.service';
   styleUrls: ["./optometer.page.scss"],
 })
 export class OptometerPage implements OnInit {
-  VisitID:string;
   Visit:Visit = new Visit();
   constructor(
     private route: ActivatedRoute,
@@ -21,31 +20,18 @@ export class OptometerPage implements OnInit {
     private dataService: DataService,
     private loading: LoadingController
   ) {
-    this.route.url.subscribe(res=>{
-      this.VisitID = this.route.snapshot.params.id;
-    })
+   
   }
 
-  async ngOnInit() {
-     if(this.VisitID){
-      const loader = await this.loading.create({
-        message: "Loading...",
-        spinner: "crescent",
-      });
-      await loader.present();
-      this.dataService
-        .getWithId(Endpoints.SingleVisit, this.VisitID)
-        .pipe(
-          finalize(() => {
-            loader.dismiss();
-          })
-        )
-        .subscribe((res: any) => {
-          if (res) {
-            this.Visit = res;
-            console.log("🚀 ~ file: optometer.page.ts ~ line 45 ~ OptometerPage ~ this.Visit=res.map ~ this.Visit", this.Visit)
-          }
-        });
-     }
+  ionViewWillEnter() {
+    const obj = localStorage.getItem("glassesDetails");
+    this.Visit = JSON.parse(obj);
+    console.log(
+      "🚀 ~ file: voucher.page.ts ~ line 24 ~ optometerPage ~ ionViewWillEnter ~ this.Visit",
+      this.Visit
+    );
+  }
+
+   ngOnInit() {
   }
 }

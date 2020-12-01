@@ -21,7 +21,7 @@
   </div>
 
   <div *ngIf="Glasses.length > 0">
-    <ion-card *ngFor="let item of Glasses" (click)="openDetails(item.Id)">
+    <ion-card *ngFor="let item of Glasses" (click)="openDetails(item)">
       <ion-card-header>
         Dr.Name: {{item.Doctor.nameEn}}
       </ion-card-header>

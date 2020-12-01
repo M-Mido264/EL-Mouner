@@ -26,6 +26,15 @@
       <span>Branch :</span> {{History?.Branch}}
     </div>
   </div>
+  
+  <div class="row">
+    <div class="col-md-6">
+      <span>Eye Type :</span> {{History?.EyeTypeName}}
+    </div>
+    <div class="col-md-6">
+      <span>Cost :</span> {{History?.Cost}}
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-12">
       <span>Patient :</span> {{sharedService.profileData?.fNameEn}} {{sharedService.profileData?.middleNameEn}}
@@ -37,23 +46,4 @@
       <span>Services :</span> {{History?.Service}}
     </div>
   </div>
-  <br>
-  <!-- <h3>
-    Vouchers
-  </h3> -->
-  <div *ngFor="let item of History?.Vouchers let i=index">
-    <h5>VoucherNo.{{i+1}}</h5>
-    <ul>
-      <li>
-        <span>Service Name:</span> {{item.serviceName}}
-      </li>
-      <li>
-        <span>Eye Type:</span> {{item.eyeTypeName}}
-      </li>
-      <li>
-        <span>Cost:</span> {{item.cost}}
-      </li>
-    </ul>
-  </div>
-
 </ion-content>
