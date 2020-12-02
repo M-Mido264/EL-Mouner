@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+    <ion-title>
+      Medicine
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p><span>Visit Date :</span> {{Medicine?.Date | date:'dd/MM/yyy'}}</p>
+  <p><span>Doctor :</span> {{Medicine?.DoctorName}}</p>
+  <p><span>Patient :</span> {{sharedService.profileData?.fNameEn}} {{sharedService.profileData?.middleNameEn}}
+    {{sharedService.profileData?.lastNameEn}}</p>
+  <p><span>Eye Type :</span> {{Medicine?.EyeTypeName}}</p>
+  <p><span>Services :</span> {{Medicine?.ServiceName}}</p>
+  <p><span>Remarks :</span> {{Medicine?.Remarks}}</p>
+  <p><span>Medicines :</span> {{Medicine?.MedName}}</p>
+
+  <p><span>Usages :</span> {{Medicine?.Usages}}</p>
+   
+</ion-content>

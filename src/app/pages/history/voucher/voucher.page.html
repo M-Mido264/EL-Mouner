@@ -10,40 +10,14 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="row">
-    <div class="col-md-6">
-      <span>Visit Date :</span> {{History?.VisitDate | date:'dd/MM/yyy'}}
-    </div>
-    <div class="col-md-6">
-      <span>Doctor :</span> {{History?.DoctorName}}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <span>Contract :</span> {{History?.Contract}}
-    </div>
-    <div class="col-md-6">
-      <span>Branch :</span> {{History?.Branch}}
-    </div>
-  </div>
+  <p><span>Visit Date :</span> {{History?.VisitDate | date:'dd/MM/yyy'}}</p>
+  <p><span>Doctor :</span> {{History?.DoctorName}}</p>
+  <p><span>Patient :</span> {{sharedService.profileData?.fNameEn}} {{sharedService.profileData?.middleNameEn}}
+    {{sharedService.profileData?.lastNameEn}}</p>
+  <p><span>Branch :</span> {{History?.Branch}}</p>
+  <p><span>Eye Type :</span> {{History?.EyeTypeName}}</p>
+  <p><span>Services :</span> {{History?.Service}}</p>
+  <p><span>Contract :</span> {{History?.Contract}}</p>
   
-  <div class="row">
-    <div class="col-md-6">
-      <span>Eye Type :</span> {{History?.EyeTypeName}}
-    </div>
-    <div class="col-md-6">
-      <span>Cost :</span> {{History?.Cost}}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <span>Patient :</span> {{sharedService.profileData?.fNameEn}} {{sharedService.profileData?.middleNameEn}}
-      {{sharedService.profileData?.lastNameEn}}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <span>Services :</span> {{History?.Service}}
-    </div>
-  </div>
+  <p><span>Cost :</span> {{History?.Cost}}</p>
 </ion-content>

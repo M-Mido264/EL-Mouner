@@ -8,7 +8,8 @@ const Endpoints = {
     Patient: API_URl + 'api/MobPatients/GetMobPatient',
     AllVisits:API_URl + 'api/MobVisits/GetMobPatientVisits',
     SingleVisit: API_URl + 'api/MobVisits/GetMobVisitById',
-    History: API_URl + 'api/MobVisits/GetMobPatientVouchers'
+    History: API_URl + 'api/MobVisits/GetMobPatientVouchers',
+    Medicine: API_URl + 'api/MobVisits/GetMobPatientMedicines'
 };
 
 export { API_URl, Storage_URL ,Endpoints };

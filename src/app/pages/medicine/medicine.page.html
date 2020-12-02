@@ -4,22 +4,30 @@
       <ion-menu-button></ion-menu-button>
   </ion-buttons>
     <ion-title>
-      Medicine
+      Medicines
     </ion-title>
-    <!-- <ion-buttons slot="end">
-      <ion-searchbar></ion-searchbar>
-    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-text-center center">
+  <div class="ion-text-center center" *ngIf="!IsLoading && Medicines.length < 1">
     <b>Sorry!</b>
     <br>
     <img src="assets/images/empty.png"/>
     <br>
     <p>
-      There is no medicines yet.
+      There is no history yet.
     </p>
-  </div> 
+  </div>
+
+  <div *ngIf="Medicines.length > 0">
+    <ion-card *ngFor="let item of Medicines" (click)="openDetails(item)">
+      <ion-card-header>
+        Dr.Name: {{item.DoctorName}}
+      </ion-card-header>
+      <ion-card-content>
+        Date: {{item.Date | date:'dd/MM/yyy'}}
+      </ion-card-content>
+    </ion-card>      
+  </div>
 </ion-content>

@@ -167,6 +167,7 @@ export class DataService {
     localStorage.removeItem('profileData');
     localStorage.removeItem('historyDetails');
     localStorage.removeItem('glassesDetails');
+    localStorage.removeItem('medicineDetails');
     
     this.storage.remove('userId').then(() => {
     }).then(() => {
