@@ -9,7 +9,12 @@ const Endpoints = {
     AllVisits:API_URl + 'api/MobVisits/GetMobPatientVisits',
     SingleVisit: API_URl + 'api/MobVisits/GetMobVisitById',
     History: API_URl + 'api/MobVisits/GetMobPatientVouchers',
-    Medicine: API_URl + 'api/MobVisits/GetMobPatientMedicines'
+    Medicine: API_URl + 'api/MobVisits/GetMobPatientMedicines',
+    Branches: API_URl + 'api/MobLookups/GetMobAllBranches',
+    Groups: API_URl + 'api/MobLookups/GetMobAllGroups',
+    Services: API_URl + 'api/MobLookups/GetMobAllServicesByGroupId',
+    Doctors: API_URl + 'api/MobLookups/GetMobAllDoctors',
+    Booking: API_URl + 'api/MobReservations/PostMobReservation'
 };
 
 export { API_URl, Storage_URL ,Endpoints };

@@ -2,10 +2,15 @@
   <ion-toolbar color="secondary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
-  </ion-buttons>
+    </ion-buttons>
     <ion-title>
       Booking
     </ion-title>
+    <ion-buttons slot="end" *ngIf="sharedService.patientId && sharedService.patientId != 'null'">
+      <ion-button (click)="openAdding()">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

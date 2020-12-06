@@ -1,0 +1,84 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+     </ion-buttons>
+    <ion-title>
+      <span *ngIf="!BookingID">Adding</span>
+      <span *ngIf="BookingID">Editing</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="Form">
+    <ion-list>
+      <div *ngIf="isTouched && getInput('GroupId').invalid" class="tool-tip-cont">
+        <span *ngIf="getInput('GroupId').errors.required">Group required</span>
+     </div>
+      <ion-item>
+        <ion-label>Group</ion-label>
+        <ion-select placeholder="Select One" formControlName="GroupId" (ngModelChange)="GroupChange($event)">
+          <ion-select-option *ngFor="let item of Groups" [value]="item.Id">{{item.NameEn}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div *ngIf="isTouched && getInput('ServiceId').invalid" class="tool-tip-cont">
+        <span *ngIf="getInput('ServiceId').errors.required">Service required</span>
+     </div>
+      <ion-item>
+        <ion-label>Service</ion-label>
+        <ion-select placeholder="Select One" formControlName="ServiceId">
+          <ion-select-option *ngFor="let item of Services" [value]="item.Id">{{item.NameEn}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div *ngIf="isTouched && getInput('DoctorId').invalid" class="tool-tip-cont">
+        <span *ngIf="getInput('DoctorId').errors.required">Doctor required</span>
+     </div>
+      <ion-item>
+        <ion-label>Doctor</ion-label>
+        <ion-select placeholder="Select One" formControlName="DoctorId">
+          <ion-select-option *ngFor="let item of Doctors" [value]="item.Id">{{item.NameEn}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div *ngIf="isTouched && ShowEyeType && getInput('EyeType').invalid" class="tool-tip-cont">
+        <span *ngIf="getInput('EyeType').errors.required">EyeType required</span>
+     </div>
+      <ion-item *ngIf="ShowEyeType">
+        <ion-label>Eye Type</ion-label>
+        <ion-select placeholder="Select One" formControlName="EyeType">
+          <ion-select-option value="0">OS</ion-select-option>
+          <ion-select-option value="1">OD</ion-select-option>
+          <ion-select-option value="2">OU</ion-select-option>
+          <ion-select-option value="3">None</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div *ngIf="isTouched && getInput('BranchId').invalid" class="tool-tip-cont">
+        <span *ngIf="getInput('BranchId').errors.required">Branch required</span>
+     </div>
+      <ion-item>
+        <ion-label>Branch</ion-label>
+        <ion-select placeholder="Select One" formControlName="BranchId">
+          <ion-select-option *ngFor="let item of Branches" [value]="item.Id">{{item.NameEn}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div *ngIf="isTouched && getInput('ReservationDate').invalid" class="tool-tip-cont">
+        <span *ngIf="getInput('ReservationDate').errors.required">Date required</span>
+     </div>
+      <ion-item>
+        <ion-label>Date</ion-label>
+        <ion-datetime [min]="minDate" formControlName="ReservationDate" [max]="maxDate" placeholder="Select Date"></ion-datetime>
+      </ion-item>
+    </ion-list>
+    <div class="ion-text-center">
+      <button (click)="save()"> {{BookingID? 'Edit': 'Save'}}</button>
+    </div>
+    
+  </form>
+
+
+</ion-content>

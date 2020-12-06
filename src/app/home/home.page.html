@@ -3,9 +3,9 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
+    <!-- <ion-title>
       Home
-    </ion-title>
+    </ion-title> -->
     <ion-buttons slot="end">
       <ion-searchbar></ion-searchbar>
     </ion-buttons>
@@ -45,7 +45,7 @@
           </ion-card-title>
           <p class="customContainer" [class.show]="a.Visible">
             {{a.Body}}
-          </p> <span style="color:  #201872;" (click)="a.Visible = !a.Visible">{{ a.Visible ? 'Show less': 'Show More' }}</span>
+          </p> <span style="color:  #201872;" (click)="a.Visible = !a.Visible">{{ a.Visible ? 'Show Less': 'Show More' }}</span>
         </ion-card-content>
       </ion-card>
     </div>
@@ -69,7 +69,7 @@
           </ion-card-title>
           <p class="customContainer" [class.show]="a.Visible">
             {{a.Body}}
-          </p> <span style="color:  #201872;" (click)="a.Visible = !a.Visible">{{ a.Visible ? 'Show less': 'Show More' }}</span>
+          </p> <span style="color:  #201872;" (click)="a.Visible = !a.Visible">{{ a.Visible ? 'Show Less': 'Show More' }}</span>
         </ion-card-content>
       </ion-card>
     </div>
