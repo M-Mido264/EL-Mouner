@@ -4,8 +4,7 @@
       <ion-menu-button></ion-menu-button>
      </ion-buttons>
     <ion-title>
-      <span *ngIf="!BookingID">Adding</span>
-      <span *ngIf="BookingID">Editing</span>
+      {{selectedBooking? 'Editing': 'Adding'}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -75,7 +74,7 @@
       </ion-item>
     </ion-list>
     <div class="ion-text-center">
-      <button (click)="save()"> {{BookingID? 'Edit': 'Save'}}</button>
+      <button (click)="save()"> {{selectedBooking? 'Edit': 'Save'}}</button>
     </div>
     
   </form>

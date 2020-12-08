@@ -15,5 +15,25 @@
 </ion-header>
 
 <ion-content>
+  <div class="ion-text-center center" *ngIf="!IsLoading && Reservations.length < 1">
+    <b>Sorry!</b>
+    <br>
+    <img src="assets/images/empty.png"/>
+    <br>
+    <p>
+      There is no reservations yet.
+    </p>
+  </div>
+
+  <div *ngIf="Reservations.length > 0">
+    <ion-card *ngFor="let item of Reservations" (click)="openDetails(item)">
+      <ion-card-header>
+        Dr.Name: {{item.DoctorName}}
+      </ion-card-header>
+      <ion-card-content>
+        Reservation Date: {{item.ReservationDate | date:'dd/MM/yyy'}}
+      </ion-card-content>
+    </ion-card>      
+  </div>
 
 </ion-content>

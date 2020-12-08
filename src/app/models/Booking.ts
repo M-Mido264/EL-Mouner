@@ -5,7 +5,17 @@ export class Booking {
   ServiceId: string;
   DoctorId: string;
   ViaMobileApp: Boolean = true;
-  EyeType: number;
+  EyeType: EyeType;
   BranchId: string;
   Come: Boolean = false;
+  CreatedDt: Date = new Date();
+  DoctorName: string;
+}
+
+export enum EyeType{
+  Left = 0,
+  Right,
+  Both,
+  None,
+  Oral
 }

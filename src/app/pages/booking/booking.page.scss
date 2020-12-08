@@ -2,3 +2,15 @@ ion-icon{
     width: 25px;
     height: 25px;
 }
+ion-card{
+    ion-card-header{
+        color:#201872;
+        font-weight: bold;
+    }
+    ion-card-content{
+        span{
+            color:grey;
+            font-weight: bold;
+        }
+    }
+}
