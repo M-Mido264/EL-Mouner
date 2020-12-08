@@ -1,4 +1,5 @@
 export class Booking {
+  Id: string;
   PatientId: string;
   GroupId: string;
   ReservationDate: Date;

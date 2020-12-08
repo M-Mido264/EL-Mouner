@@ -148,10 +148,11 @@ export class AddEditBookingPage implements OnInit ,AfterViewInit{
               NameEn: element.nameEn,
             }));
               console.log("🚀 ~ file: add-edit-booking.page.ts ~ line 150 ~ AddEditBookingPage ~ this.Services=res.map ~ this.Services", this.Services)
-            if(this.selectedBooking)
+            if(this.selectedBooking){
               console.log("service")
               this.Form.controls["ServiceId"].setValue(this.selectedBooking.ServiceId);
               console.log('after set',this.Form.value.ServiceId);
+            }
           }
         });
     }
@@ -193,6 +194,7 @@ export class AddEditBookingPage implements OnInit ,AfterViewInit{
                 res
               );
               this.isTouched = false;
+              localStorage.removeItem("bookingObject");
               this.router.navigate(['booking']);
             },
             (err) => {
@@ -207,6 +209,33 @@ export class AddEditBookingPage implements OnInit ,AfterViewInit{
           );
       } else {
         // editing
+        this.Booking.Id = this.selectedBooking.Id;
+        console.log("🚀 ~ file: add-edit-booking.page.ts ~ line 212 ~ AddEditBookingPage ~ save-edit ~ this.Booking", this.Booking)
+        this.dataService.secure_Update(Endpoints.EditBooking,this.Booking).pipe(
+          finalize(() => {
+            loader.dismiss();
+          })
+        )
+        .subscribe(
+          (res) => {
+            console.log(
+              "🚀 ~ file: add-edit-booking.page.ts ~ line 147 ~ AddEditBookingPage ~ save ~ res",
+              res
+            );
+            this.isTouched = false;
+            localStorage.removeItem("bookingObject");
+            this.router.navigate(['booking']);
+          },
+          (err) => {
+            this.isTouched = false;
+            // show toaster
+            this.presentError();
+            console.log(
+              "🚀 ~ file: add-edit-booking.page.ts ~ line 152 ~ AddEditBookingPage ~ save ~ err",
+              err
+            );
+          }
+        );
       }
     }
   }

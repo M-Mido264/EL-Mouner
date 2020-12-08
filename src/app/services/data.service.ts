@@ -73,14 +73,15 @@ export class DataService {
     return this.httpClient.post(url, data, { headers: headers });
   }
   secure_Update(url, data) {
-
-    console.log("this.sharedService.userId", this.sharedService.userId);
+    // let headers = new HttpHeaders({
+    //   // 'Accept':'application/json',
+    //   'Authorization': this.sharedService.accessToken,
+    //   'Id': this.sharedService.userId.toString()
+    // });
     let headers = new HttpHeaders({
-      // 'Accept':'application/json',
-      'Authorization': this.sharedService.accessToken,
-      'Id': this.sharedService.userId.toString()
+      'Content-Type': 'application/json'
     });
-    return this.httpClient.put(url, data, { headers: headers });
+    return this.httpClient.put(url, data,{ headers: headers });
   }
 
   secure_post_no_id(url, data) {

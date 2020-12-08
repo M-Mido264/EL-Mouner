@@ -15,7 +15,8 @@ const Endpoints = {
     Services: API_URl + 'api/MobLookups/GetMobAllServicesByGroupId',
     Doctors: API_URl + 'api/MobLookups/GetMobAllDoctors',
     Booking: API_URl + 'api/MobReservations/AddMobReservation',
-    Reservation: API_URl + 'api/MobReservations/GetPatientMobReservations'
+    Reservation: API_URl + 'api/MobReservations/GetPatientMobReservations',
+    EditBooking: API_URl + 'api/MobReservations/OrdinaryPut'
 };
 
 export { API_URl, Storage_URL ,Endpoints };

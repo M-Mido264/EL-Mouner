@@ -72,6 +72,7 @@ export class BookingPage implements OnInit {
           if (res && res.length > 0) {
             this.Reservations = res
               .map((element) => ({
+                Id: element.id,
                 GroupId: element.groupId,
                 ReservationDate: element.reservationDate,
                 ServiceId: element.serviceId,
