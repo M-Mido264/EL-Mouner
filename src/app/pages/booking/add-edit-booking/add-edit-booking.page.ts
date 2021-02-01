@@ -6,6 +6,7 @@ import { LoadingController, Platform, ToastController } from "@ionic/angular";
 import { finalize } from "rxjs/operators";
 import { Booking } from "src/app/models/Booking";
 import { Lookups } from "src/app/models/Lookups";
+import { NewPatientBooking } from "src/app/models/NewPatientBooking";
 import { Endpoints } from "src/app/services/api.endpoints";
 import { DataService } from "src/app/services/data.service";
 import { SharedService } from "src/app/services/shared.service";
@@ -16,12 +17,16 @@ import { SharedService } from "src/app/services/shared.service";
   styleUrls: ["./add-edit-booking.page.scss"],
   providers: [DatePipe],
 })
-export class AddEditBookingPage implements OnInit ,AfterViewInit{
+export class AddEditBookingPage implements OnInit, AfterViewInit {
   selectedBooking: Booking;
   minDate: string;
   maxDate: string;
+  minDateForDOB: string;
+  maxDateForDOB: string;
   Booking: Booking = new Booking();
+  NewPatientBooking: NewPatientBooking = new NewPatientBooking();
   Form: FormGroup;
+  NewPatientForm: FormGroup;
   isTouched: Boolean = false;
   Services: Lookups[] = [];
   Groups: Lookups[] = [];
@@ -32,7 +37,7 @@ export class AddEditBookingPage implements OnInit ,AfterViewInit{
   constructor(
     private route: ActivatedRoute,
     private datePipe: DatePipe,
-    private sharedService: SharedService,
+    public sharedService: SharedService,
     private dataService: DataService,
     public loading: LoadingController,
     private router: Router,
@@ -47,6 +52,24 @@ export class AddEditBookingPage implements OnInit ,AfterViewInit{
       ReservationDate: new FormControl(null, [Validators.required]),
       EyeType: new FormControl(null, [Validators.required]),
     });
+
+    this.NewPatientForm = new FormGroup({
+      GroupId: new FormControl(null, [Validators.required]),
+      ServiceId: new FormControl(null, [Validators.required]),
+      DoctorId: new FormControl(null, [Validators.required]),
+      BranchId: new FormControl(null, [Validators.required]),
+      ReservationDate: new FormControl(null, [Validators.required]),
+      EyeType: new FormControl(null, [Validators.required]),
+      FNameAr: new FormControl(null, [Validators.required]),
+      MiddleNameAr: new FormControl(null, [Validators.required]),
+      LastnameAr: new FormControl(null, [Validators.required]),
+      FNameEn: new FormControl(null, [Validators.required]),
+      MiddleNameEn: new FormControl(null, [Validators.required]),
+      LastNameEn: new FormControl(null, [Validators.required]),
+      DOB: new FormControl(null, [Validators.required]),
+      Mobile: new FormControl(null, Validators.compose([Validators.required , Validators.minLength(10), Validators.maxLength(20)])),
+      Gender: new FormControl(null, [Validators.required]),
+    });
     this.route.url.subscribe((res) => {
       const obj = localStorage.getItem("bookingObject");
       this.selectedBooking = JSON.parse(obj);
@@ -56,10 +79,10 @@ export class AddEditBookingPage implements OnInit ,AfterViewInit{
       );
     });
   }
- 
 
   ionViewWillEnter() {
-    this.backButtonSubscription = this.platefrom.backButton.subscribeWithPriority(1,
+    this.backButtonSubscription = this.platefrom.backButton.subscribeWithPriority(
+      1,
       async () => {
         this.router.navigate(["/booking"]);
         localStorage.removeItem("bookingObject");
@@ -68,6 +91,14 @@ export class AddEditBookingPage implements OnInit ,AfterViewInit{
     this.minDate = this.datePipe.transform(new Date(), "yyy-MM-dd");
     this.maxDate = this.datePipe.transform(
       new Date(new Date().setFullYear(new Date().getFullYear() + 10)),
+      "yyy-MM-dd"
+    );
+    this.maxDateForDOB = this.datePipe.transform(
+      new Date(new Date().setFullYear(new Date().getFullYear() - 5)),
+      "yyy-MM-dd"
+    );
+    this.minDateForDOB  = this.datePipe.transform(
+      new Date(new Date().setFullYear(new Date().getFullYear() - 100)),
       "yyy-MM-dd"
     );
   }
@@ -84,6 +115,7 @@ export class AddEditBookingPage implements OnInit ,AfterViewInit{
           Id: element.id,
           NameAr: element.nameAr,
           NameEn: element.nameEn,
+          Code: null
         }));
       }
     });
@@ -94,6 +126,7 @@ export class AddEditBookingPage implements OnInit ,AfterViewInit{
           Id: element.id,
           NameAr: element.nameAr,
           NameEn: element.nameEn,
+          Code: null
         }));
       }
     });
@@ -104,21 +137,24 @@ export class AddEditBookingPage implements OnInit ,AfterViewInit{
           Id: element.id,
           NameAr: element.nameAr,
           NameEn: element.nameEn,
+          Code: element.code
         }));
-       
       }
-    });    
+    });
   }
 
   ngAfterViewInit(): void {
-    if(this.selectedBooking){
-      setTimeout(()=>{
-        this.setBookingFormValues(this.selectedBooking)
-      },500)
+    if (this.selectedBooking) {
+      setTimeout(() => {
+        this.setBookingFormValues(this.selectedBooking);
+      }, 500);
     }
   }
 
   getInput(input: string) {
+    if(!this.sharedService.patientId || this.sharedService.patientId == 'null'){
+      return this.NewPatientForm.controls[input];
+    }
     return this.Form.controls[input];
   }
 
@@ -146,12 +182,18 @@ export class AddEditBookingPage implements OnInit ,AfterViewInit{
               Id: element.id,
               NameAr: element.nameAr,
               NameEn: element.nameEn,
+              Code: null
             }));
-              console.log("🚀 ~ file: add-edit-booking.page.ts ~ line 150 ~ AddEditBookingPage ~ this.Services=res.map ~ this.Services", this.Services)
-            if(this.selectedBooking){
-              console.log("service")
-              this.Form.controls["ServiceId"].setValue(this.selectedBooking.ServiceId);
-              console.log('after set',this.Form.value.ServiceId);
+            console.log(
+              "🚀 ~ file: add-edit-booking.page.ts ~ line 150 ~ AddEditBookingPage ~ this.Services=res.map ~ this.Services",
+              this.Services
+            );
+            if (this.selectedBooking) {
+              console.log("service");
+              this.Form.controls["ServiceId"].setValue(
+                this.selectedBooking.ServiceId
+              );
+              console.log("after set", this.Form.value.ServiceId);
             }
           }
         });
@@ -195,7 +237,7 @@ export class AddEditBookingPage implements OnInit ,AfterViewInit{
               );
               this.isTouched = false;
               localStorage.removeItem("bookingObject");
-              this.router.navigate(['booking']);
+              this.router.navigate(["booking"]);
             },
             (err) => {
               this.isTouched = false;
@@ -210,38 +252,96 @@ export class AddEditBookingPage implements OnInit ,AfterViewInit{
       } else {
         // editing
         this.Booking.Id = this.selectedBooking.Id;
-        console.log("🚀 ~ file: add-edit-booking.page.ts ~ line 212 ~ AddEditBookingPage ~ save-edit ~ this.Booking", this.Booking)
-        this.dataService.secure_Update(Endpoints.EditBooking,this.Booking).pipe(
+        console.log(
+          "🚀 ~ file: add-edit-booking.page.ts ~ line 212 ~ AddEditBookingPage ~ save-edit ~ this.Booking",
+          this.Booking
+        );
+        this.dataService
+          .secure_Update(Endpoints.EditBooking, this.Booking)
+          .pipe(
+            finalize(() => {
+              loader.dismiss();
+            })
+          )
+          .subscribe(
+            (res) => {
+              console.log(
+                "🚀 ~ file: add-edit-booking.page.ts ~ line 147 ~ AddEditBookingPage ~ save ~ res",
+                res
+              );
+              this.isTouched = false;
+              localStorage.removeItem("bookingObject");
+              this.router.navigate(["booking"]);
+            },
+            (err) => {
+              this.isTouched = false;
+              // show toaster
+              this.presentError();
+              console.log(
+                "🚀 ~ file: add-edit-booking.page.ts ~ line 152 ~ AddEditBookingPage ~ save ~ err",
+                err
+              );
+            }
+          );
+      }
+    }
+  }
+
+  async saveNwePatient() {
+    this.isTouched = true;
+    if (this.NewPatientForm.valid) {
+      const loader = await this.loading.create({
+        message: "Loading...",
+        spinner: "crescent",
+      });
+      await loader.present();
+      this.NewPatientBooking.BranchId = this.NewPatientForm.value.BranchId;
+      this.NewPatientBooking.DoctorId = this.NewPatientForm.value.DoctorId;
+      this.NewPatientBooking.EyeType = parseInt(this.NewPatientForm.value.EyeType);
+      this.NewPatientBooking.GroupId = this.NewPatientForm.value.GroupId;
+      this.NewPatientBooking.ServiceId = this.NewPatientForm.value.ServiceId;
+      this.NewPatientBooking.DOB = this.NewPatientForm.value.DOB;
+      this.NewPatientBooking.ReservationDate = this.NewPatientForm.value.ReservationDate;
+      this.NewPatientBooking.FNameAr = this.NewPatientForm.value.FNameAr;
+      this.NewPatientBooking.FNameEn = this.NewPatientForm.value.FNameEn;
+      this.NewPatientBooking.Gender = this.NewPatientForm.value.Gender;
+      this.NewPatientBooking.LastNameEn = this.NewPatientForm.value.LastNameEn;
+      this.NewPatientBooking.LastnameAr = this.NewPatientForm.value.LastnameAr;
+      this.NewPatientBooking.MiddleNameAr = this.NewPatientForm.value.MiddleNameAr;
+      this.NewPatientBooking.MiddleNameEn = this.NewPatientForm.value.MiddleNameEn;
+      this.NewPatientBooking.Mobile = this.NewPatientForm.value.Mobile;
+      this.NewPatientBooking.UserId = this.sharedService.userId;
+      this.NewPatientBooking.BranchNumber = this.Branches.find(x=>x.Id == this.NewPatientForm.value.BranchId).Code;
+      console.log("🚀 ~ file: add-edit-booking.page.ts ~ line 300 ~ AddEditBookingPage ~ saveNwePatient ~ this.NewPatientBooking", JSON.stringify(this.NewPatientBooking))
+      JSON.stringify(this.NewPatientBooking)
+      // adding
+      this.dataService
+        .post(Endpoints.BookingForNewPatient, this.NewPatientBooking)
+        .pipe(
           finalize(() => {
             loader.dismiss();
           })
         )
         .subscribe(
           (res) => {
-            console.log(
-              "🚀 ~ file: add-edit-booking.page.ts ~ line 147 ~ AddEditBookingPage ~ save ~ res",
-              res
-            );
+          console.log("🚀 ~ file: add-edit-booking.page.ts ~ line 300 ~ AddEditBookingPage ~ saveNwePatient ~ res", res)
             this.isTouched = false;
             localStorage.removeItem("bookingObject");
-            this.router.navigate(['booking']);
+            this.router.navigate(["booking"]);
           },
           (err) => {
+          console.log("🚀 ~ file: add-edit-booking.page.ts ~ line 306 ~ AddEditBookingPage ~ saveNwePatient ~ err", err)
             this.isTouched = false;
             // show toaster
             this.presentError();
-            console.log(
-              "🚀 ~ file: add-edit-booking.page.ts ~ line 152 ~ AddEditBookingPage ~ save ~ err",
-              err
-            );
+            
           }
         );
-      }
     }
   }
 
   setBookingFormValues(values: Booking) {
-    console.log("onSet")
+    console.log("onSet");
     this.Form.controls["BranchId"].setValue(values.BranchId || null);
     this.Form.controls["DoctorId"].setValue(values.DoctorId || null);
     this.Form.controls["EyeType"].setValue(values.EyeType.toString() || null);
@@ -256,7 +356,7 @@ export class AddEditBookingPage implements OnInit ,AfterViewInit{
     let toast = this.toastCtrl.create({
       message: "Server error, please try again later!",
       duration: 3000,
-      position: "top"
+      position: "top",
     });
     (await toast).present();
   }
