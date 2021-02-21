@@ -25,7 +25,7 @@ export class DataService {
   }
 
   getWithParam(url,param) {
-    return this.httpClient.get(url+"?senderId="+param);
+    return this.httpClient.get(url+"?NameAr="+param);
   }
 
 
@@ -156,6 +156,7 @@ export class DataService {
     this.sharedService.userId = null;
     this.sharedService.accessToken = null;
     this.sharedService.patientId = null;
+    this.sharedService.mobile = null;
     this.sharedService.UserName = null;
     this.sharedService.profileData = null;
     this.sharedService.lang = null;
@@ -164,6 +165,7 @@ export class DataService {
     localStorage.removeItem('password');
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userId');
+    localStorage.removeItem('mobile');
     localStorage.removeItem('patientId');
     localStorage.removeItem('profileData');
     localStorage.removeItem('historyDetails');

@@ -14,6 +14,7 @@ import { MenuController } from '@ionic/angular';
    _accessToken;
    _userId;
    _patientId;
+   _mobile;
    _lang;
    _RefusedReasons;
    _profileData;
@@ -44,6 +45,12 @@ import { MenuController } from '@ionic/angular';
    }
    get userId() {
      return this._userId;
+   }
+   set mobile(data) {
+     this._mobile = data;
+   }
+   get mobile() {
+     return this._mobile;
    }
    set patientId(data) {
      this._patientId = data;

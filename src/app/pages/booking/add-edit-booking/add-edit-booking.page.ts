@@ -63,9 +63,6 @@ export class AddEditBookingPage implements OnInit, AfterViewInit {
       FNameAr: new FormControl(null, [Validators.required]),
       MiddleNameAr: new FormControl(null, [Validators.required]),
       LastnameAr: new FormControl(null, [Validators.required]),
-      FNameEn: new FormControl(null, [Validators.required]),
-      MiddleNameEn: new FormControl(null, [Validators.required]),
-      LastNameEn: new FormControl(null, [Validators.required]),
       DOB: new FormControl(null, [Validators.required]),
       Mobile: new FormControl(null, Validators.compose([Validators.required , Validators.minLength(10), Validators.maxLength(20)])),
       Gender: new FormControl(null, [Validators.required]),
@@ -101,6 +98,13 @@ export class AddEditBookingPage implements OnInit, AfterViewInit {
       new Date(new Date().setFullYear(new Date().getFullYear() - 100)),
       "yyy-MM-dd"
     );
+  }
+
+
+  WithoutTime(dateTime:Date) {
+    var date = new Date(new Date(dateTime).getTime());
+    date.setHours(0, 0, 0, 0);
+    return date;
   }
 
   ionViewDidLeave() {
@@ -144,6 +148,9 @@ export class AddEditBookingPage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    if(!this.sharedService.patientId || this.sharedService.patientId == 'null'){
+      this.NewPatientForm.controls['Mobile'].setValue(this.sharedService.mobile || null)
+    }
     if (this.selectedBooking) {
       setTimeout(() => {
         this.setBookingFormValues(this.selectedBooking);
@@ -213,7 +220,7 @@ export class AddEditBookingPage implements OnInit, AfterViewInit {
       this.Booking.EyeType = parseInt(this.Form.value.EyeType);
       this.Booking.GroupId = this.Form.value.GroupId;
       this.Booking.ServiceId = this.Form.value.ServiceId;
-      this.Booking.ReservationDate = this.Form.value.ReservationDate;
+      this.Booking.ReservationDate = this.WithoutTime(this.Form.value.ReservationDate);
       this.Booking.PatientId = this.sharedService.patientId;
       console.log(
         "🚀 ~ file: add-edit-booking.page.ts ~ line 60 ~ AddEditBookingPage ~ save ~ this.Booking",
@@ -300,20 +307,16 @@ export class AddEditBookingPage implements OnInit, AfterViewInit {
       this.NewPatientBooking.EyeType = parseInt(this.NewPatientForm.value.EyeType);
       this.NewPatientBooking.GroupId = this.NewPatientForm.value.GroupId;
       this.NewPatientBooking.ServiceId = this.NewPatientForm.value.ServiceId;
-      this.NewPatientBooking.DOB = this.NewPatientForm.value.DOB;
-      this.NewPatientBooking.ReservationDate = this.NewPatientForm.value.ReservationDate;
+      this.NewPatientBooking.DOB = this.WithoutTime(this.NewPatientForm.value.DOB);
+      this.NewPatientBooking.ReservationDate = this.WithoutTime(this.NewPatientForm.value.ReservationDate);
       this.NewPatientBooking.FNameAr = this.NewPatientForm.value.FNameAr;
-      this.NewPatientBooking.FNameEn = this.NewPatientForm.value.FNameEn;
       this.NewPatientBooking.Gender = this.NewPatientForm.value.Gender;
-      this.NewPatientBooking.LastNameEn = this.NewPatientForm.value.LastNameEn;
       this.NewPatientBooking.LastnameAr = this.NewPatientForm.value.LastnameAr;
       this.NewPatientBooking.MiddleNameAr = this.NewPatientForm.value.MiddleNameAr;
-      this.NewPatientBooking.MiddleNameEn = this.NewPatientForm.value.MiddleNameEn;
-      this.NewPatientBooking.Mobile = this.NewPatientForm.value.Mobile;
+      this.NewPatientBooking.Mobile = this.NewPatientForm.value.Mobile.toString();
       this.NewPatientBooking.UserId = this.sharedService.userId;
       this.NewPatientBooking.BranchNumber = this.Branches.find(x=>x.Id == this.NewPatientForm.value.BranchId).Code;
-      console.log("🚀 ~ file: add-edit-booking.page.ts ~ line 300 ~ AddEditBookingPage ~ saveNwePatient ~ this.NewPatientBooking", JSON.stringify(this.NewPatientBooking))
-      JSON.stringify(this.NewPatientBooking)
+      console.log("🚀 ~ file: add-edit-booking.page.ts ~ line 300 ~ AddEditBookingPage ~ saveNwePatient ~ this.NewPatientBooking",this.NewPatientBooking)
       // adding
       this.dataService
         .post(Endpoints.BookingForNewPatient, this.NewPatientBooking)
@@ -333,8 +336,11 @@ export class AddEditBookingPage implements OnInit, AfterViewInit {
           console.log("🚀 ~ file: add-edit-booking.page.ts ~ line 306 ~ AddEditBookingPage ~ saveNwePatient ~ err", err)
             this.isTouched = false;
             // show toaster
-            this.presentError();
-            
+            if(err.error == "من فضلك ادخل تاريخ مستقبلي"){
+               this.presentErrorMessage();
+            }else{
+              this.presentError();
+            }            
           }
         );
     }
@@ -355,6 +361,15 @@ export class AddEditBookingPage implements OnInit, AfterViewInit {
   async presentError() {
     let toast = this.toastCtrl.create({
       message: "Server error, please try again later!",
+      duration: 3000,
+      position: "top",
+    });
+    (await toast).present();
+  }
+
+  async presentErrorMessage(){
+    let toast = this.toastCtrl.create({
+      message: "Please choose future date",
       duration: 3000,
       position: "top",
     });

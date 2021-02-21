@@ -11,9 +11,9 @@ export class NewPatientBooking {
     FNameAr: string
     MiddleNameAr: string
     LastnameAr: string
-    FNameEn: string
-    MiddleNameEn: string
-    LastNameEn: string
+    FNameEn: string = ""
+    MiddleNameEn: string = ""
+    LastNameEn: string = ""
     DOB: Date
     Mobile: string
     BranchNumber: string

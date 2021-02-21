@@ -87,43 +87,28 @@
         <span *ngIf="getInput('FNameAr').errors.required">FirstName In Arabic Required</span>
       </div>
       <ion-item no-lines>
-        <ion-input  placeholder="First Name In Arabic" formControlName="FNameAr" name="FNameAr"></ion-input>
+        <ion-input  placeholder="First Name In Arabic"  formControlName="FNameAr" name="FNameAr"></ion-input>
       </ion-item>
 
-      <div *ngIf="isTouched && getInput('FNameEn').invalid" class="tool-tip-cont">
-        <span *ngIf="getInput('FNameEn').errors.required">FirstName In English Required</span>
-      </div>
-      <ion-item no-lines>
-        <ion-input  placeholder="First Name In English" formControlName="FNameEn" name="FNameEn"></ion-input>
-      </ion-item>
+     
 
       <div *ngIf="isTouched && getInput('MiddleNameAr').invalid" class="tool-tip-cont">
         <span *ngIf="getInput('MiddleNameAr').errors.required">MiddleName In Arabic Required</span>
       </div>
       <ion-item no-lines>
-        <ion-input  placeholder="Middle Name In Arabic" formControlName="MiddleNameAr" name="MiddleNameAr"></ion-input>
+        <ion-input  placeholder="Middle Name In Arabic"  formControlName="MiddleNameAr" name="MiddleNameAr"></ion-input>
       </ion-item>
 
-      <div *ngIf="isTouched && getInput('MiddleNameEn').invalid" class="tool-tip-cont">
-        <span *ngIf="getInput('MiddleNameEn').errors.required">MiddleName In English Required</span>
-      </div>
-      <ion-item no-lines>
-        <ion-input  placeholder="Middle Name In English" formControlName="MiddleNameEn" name="MiddleNameEn"></ion-input>
-      </ion-item>
+    
 
       <div *ngIf="isTouched && getInput('LastnameAr').invalid" class="tool-tip-cont">
         <span *ngIf="getInput('LastnameAr').errors.required">LastName In Arabic Required</span>
       </div>
       <ion-item no-lines>
-        <ion-input  placeholder="Last Name In Arabic" formControlName="LastnameAr" name="LastnameAr"></ion-input>
+        <ion-input  placeholder="Last Name In Arabic" formControlName="LastnameAr"  name="LastnameAr"></ion-input>
       </ion-item>
 
-      <div *ngIf="isTouched && getInput('LastNameEn').invalid" class="tool-tip-cont">
-        <span *ngIf="getInput('LastNameEn').errors.required">LastName In English Required</span>
-      </div>
-      <ion-item no-lines>
-        <ion-input  placeholder="Last Name In English" formControlName="LastNameEn" name="LastNameEn"></ion-input>
-      </ion-item>
+     
 
       <div *ngIf="isTouched && getInput('Mobile').invalid" class="tool-tip-cont">
         <span *ngIf="getInput('Mobile').errors.required">Mobile required</span>
