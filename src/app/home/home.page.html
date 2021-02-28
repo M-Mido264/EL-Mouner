@@ -21,9 +21,9 @@
       <ion-segment-button value="1">
         NEWS
       </ion-segment-button>
-      <ion-segment-button value="2">
+      <!-- <ion-segment-button value="2">
         FEATURES
-      </ion-segment-button>
+      </ion-segment-button> -->
     </ion-segment>
   </div>
   <div [ngSwitch]="segment">  
@@ -74,7 +74,7 @@
       </ion-card>
     </div>
   </div>
-   <div [ngSwitch]="segment">
+   <!-- <div [ngSwitch]="segment">
     <div class="cards-bg" *ngSwitchCase="'2'">
       <div class="ion-text-center center" *ngIf="!IsLoading">
         <b>Sorry!</b>
@@ -86,7 +86,7 @@
         </p>
       </div>     
     </div>
-  </div>
+  </div> -->
 
   <!-- <ion-slides #slides (ionSlideDidChange)="slideChanged()" scrollbar="true">
     <ion-slide>

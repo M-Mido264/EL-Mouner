@@ -32,7 +32,7 @@ export class RegisterPage implements OnInit {
     {
       this.regForm = this._FormBuilder.group({ // username => email
         UserName: ['', Validators.compose([Validators.required, Validators.pattern("[a-z0-9.-_]{1,}@[a-z.-]{2,}[.]{1}[a-z]{2,4}")] )],
-        Mobile: ['', Validators.compose([Validators.required , Validators.minLength(10), Validators.maxLength(20)])],
+        Mobile: ['', Validators.compose([Validators.required , Validators.minLength(11), Validators.maxLength(11)])],
         PatientNo: [null],
         PatientCheckedForm: [''],
         Password: ['', Validators.compose([Validators.required, Validators.minLength(6),Validators.maxLength(12)])],
